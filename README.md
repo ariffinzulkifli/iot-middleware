@@ -292,7 +292,7 @@ to access the applications in your browser.
 - Node-RED http://`ip-address`:1880
   - username: admin
   - password: password
-- InfluxDB http://`ip-address`:8086
+- InfluxDB http://`ip-address`:8087
   - username: admin
   - password: password
 - Grafana http://`ip-address`:3000
