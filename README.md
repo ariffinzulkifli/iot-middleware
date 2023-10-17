@@ -182,6 +182,7 @@ TriggeredBy: ● docker.socket
      CGroup: /system.slice/docker.service
              └─7854 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
 ```
+Hold `Ctrl + C` on keyboard to exit the status back to terminal prompt.
 
 ### Docker Compose Installation
 
@@ -230,9 +231,45 @@ cd ~/iot-middleware
 cat docker-compose.yml
 ```
 
+You’ll see output like below.
+```
+version: "3"
+
+services:
+  nodered:
+    image: nodered/node-red:latest
+    restart: unless-stopped
+    ports:
+      - 1880:1880
+    volumes:
+      - ./configuration/nodered/settings.js:/data/settings.js
+    networks:
+      - iotstack
+```
+
 4. Launch the Docker Compose services defined in the `docker-compose.yml` file in detached mode.
 ```bash
 docker compose up -d
+```
+Wait until all containers is successfully `Started` like below.
+
+```
+[+] Running 15/15
+ ✔ Network iot-middleware_iotstack                                    Created            0.2s 
+ ✔ Volume "iot-middleware_influxdb-data"                              Created            0.0s 
+ ✔ Volume "iot-middleware_redisdata"                                  Created            0.0s 
+ ✔ Volume "iot-middleware_postgresqldata"                             Created            0.0s 
+ ✔ Volume "iot-middleware_grafana-data"                               Created            0.0s 
+ ✔ Container iot-middleware-grafana-1                                 Started            0.5s 
+ ✔ Container iot-middleware-redis-1                                   Started            0.5s 
+ ✔ Container iot-middleware-nodered-1                                 Started            0.5s 
+ ✔ Container iot-middleware-mosquitto-1                               Started            0.5s 
+ ✔ Container iot-middleware-influxdb-1                                Started            0.5s 
+ ✔ Container iot-middleware-postgres-1                                Started            0.5s 
+ ✔ Container iot-middleware-chirpstack-gateway-bridge-basicstation-1  Started            0.0s 
+ ✔ Container iot-middleware-chirpstack-gateway-bridge-1               Started            0.0s 
+ ✔ Container iot-middleware-chirpstack-1                              Started            0.0s 
+ ✔ Container iot-middleware-chirpstack-rest-api-1                     Started            0.0s 
 ```
 
 5. Verify that the Docker Compose containers are running using the following command.
