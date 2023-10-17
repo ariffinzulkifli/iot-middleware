@@ -14,16 +14,28 @@ services:
   influxdb:
     image: influxdb:latest
     restart: unless-stopped
-    ports:
-      - 8086:8086
     environment:
-      - DOCKER_INFLUXDB_INIT_MODE=setup
-      - DOCKER_INFLUXDB_INIT_USERNAME=admin
-      - DOCKER_INFLUXDB_INIT_PASSWORD=password
-      - DOCKER_INFLUXDB_INIT_ORG=organisation
-      - DOCKER_INFLUXDB_INIT_BUCKET=sensors
+    - TZ=Asia/Kuala_Lumpur
+    - DOCKER_INFLUXDB_INIT_USERNAME=admin
+    - DOCKER_INFLUXDB_INIT_PASSWORD=password
+    - DOCKER_INFLUXDB_INIT_ORG=my-organisation
+    - DOCKER_INFLUXDB_INIT_BUCKET=iot-sensors
+    - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=A8C2B071-35F6-43F8-9F51-C5F584B2366B
+    - DOCKER_INFLUXDB_INIT_MODE=setup
+    # - DOCKER_INFLUXDB_INIT_MODE=upgrade
+    ports:
+      - "8087:8086"
     volumes:
-      - influxdb-data:/var/lib/influxdb
+      - ./volumes/influxdb2/data:/var/lib/influxdb2
+      - ./volumes/influxdb2/config:/etc/influxdb2
+      - ./volumes/influxdb2/backup:/var/lib/backup
+    # - ./volumes/influxdb.migrate/data:/var/lib/influxdb:ro
+    healthcheck:
+      test: ["CMD", "influx", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     networks:
       - iotstack
 
@@ -135,7 +147,6 @@ networks:
     driver: bridge
 
 volumes:
-  influxdb-data:
   grafana-data:
   postgresqldata:
   redisdata:
