@@ -28,7 +28,7 @@ Docker Compose allows you to define your entire application stack in a single, e
 In this repository contain `docker-compose.yml` with definition of stack of applications stated above so we can easily setup IoT middleware.
 
 **Note:** Please use this `docker-compose.yml` file as a starting point for training and testing
-but keep in mind that for production usage it might need modifications.
+but keep in mind that for production usage it might need modifications, especially security.
 
 ## Directory layout
 
