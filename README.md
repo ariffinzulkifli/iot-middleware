@@ -186,17 +186,17 @@ to access the applications in your browser.
 **Note:** change the `ip-address` with your server ip-address.
 
 - Node-RED http://`ip-address`:1880
- - username: admin
- - password: password
+  - username: admin
+  - password: password
 - InfluxDB http://`ip-address`:8086
- - username: admin
- - password: password
+  - username: admin
+  - password: password
 - Grafana http://`ip-address`:3000
- - username: admin
- - password: password
+  - username: admin
+  - password: password
 - Chirpstack http://`ip-address`:8080
- - username: admin
- - password: admin
+  - username: admin
+  - password: admin
 - Chirpstack REST API http://`ip-address`:8090
 
 While Mosquitto MQTT broker can be access by it's configuration below:
@@ -204,6 +204,6 @@ While Mosquitto MQTT broker can be access by it's configuration below:
 - protocol: TCP
   - port: 1883
 - protocol: Websockets
- - port: 9001
+  - port: 9001
 - username: admin
 - password: password
