@@ -3,8 +3,8 @@
 
 [integration.mqtt.auth.generic]
 servers=["tcp://mosquitto:1883"]
-username="admin"
-password="password"
+username=""
+password=""
 
 [integration.mqtt]
 event_topic_template="as923_2/gateway/{{ .GatewayID }}/event/{{ .EventType }}"
