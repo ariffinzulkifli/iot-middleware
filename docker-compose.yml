@@ -16,10 +16,12 @@ services:
     restart: unless-stopped
     ports:
       - 8086:8086
-    environment:
-      - INFLUXDB_ADMIN_USER=admin
-      - INFLUXDB_ADMIN_PASSWORD=password
-      - INFLUXDB_DB=sensors
+    environments:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=password
+      - DOCKER_INFLUXDB_INIT_ORG=organisation
+      - DOCKER_INFLUXDB_INIT_BUCKET=sensors
     volumes:
       - influxdb-data:/var/lib/influxdb
     networks:
