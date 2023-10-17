@@ -65,6 +65,7 @@ services:
     volumes:
       - ./configuration/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
     environment:
+      - MQTT_BROKER_HOST=mosquitto
       - INTEGRATION__MQTT__EVENT_TOPIC_TEMPLATE=as923/gateway/{{ .GatewayID }}/event/{{ .EventType }}
       - INTEGRATION__MQTT__STATE_TOPIC_TEMPLATE=as923/gateway/{{ .GatewayID }}/state/{{ .StateType }}
       - INTEGRATION__MQTT__COMMAND_TOPIC_TEMPLATE=as923/gateway/{{ .GatewayID }}/command/#
@@ -77,6 +78,8 @@ services:
     image: chirpstack/chirpstack-gateway-bridge:latest
     restart: unless-stopped
     command: -c /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge-basicstation-as923.toml
+    environment:
+      - MQTT_BROKER_HOST=mosquitto
     ports:
       - 3001:3001
     volumes:

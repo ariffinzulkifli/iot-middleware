@@ -2,7 +2,7 @@
 # configuration example and documentation.
 
 [integration.mqtt.auth.generic]
-servers=["tcp://mosquitto:1883"]
+servers=["tcp://$MQTT_BROKER_HOST:1883"]
 username="admin"
 password="password"
 
