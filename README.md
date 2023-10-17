@@ -42,7 +42,74 @@ but keep in mind that for production usage it might need modifications.
 
 ## Requirements
 
-Before using this `docker-compose.yml` file, make sure you have [Docker](https://www.docker.com/community-edition) installed.
+Before using this `docker-compose.yml` file, make sure you have a remote server by cloud hosting service like [GBCloud](https://billing.gbcloud.net/aff.php?aff=87) and [Docker](https://www.docker.com/community-edition) installed in the server.
+
+### Create Account on GBCloud
+
+This guide will guide you through the steps to create account on GBCloud.
+
+1. Click the `Create account` link on [GBCloud](https://billing.gbcloud.net/aff.php?aff=87) login page.
+2. Fill in your `Personal Information`, `Billing Address`, `Additional Information` and `Account Security`.
+3. Check the `I have read and agree to the Terms of Service`. and click the `Register` button.
+
+### Remote SSH Ubuntu Server
+
+This guide will guide you through the steps to remote SSH your Ubuntu server.
+
+1. Open Terminal on your PC.
+
+**Note:** You can use any suitable software such as [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.3), [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html), [Cmder](https://github.com/cmderdev/cmder), etc.
+
+2. Use the SSH command to connect to the remote server.
+
+**Note:** change the `ip-address` with your server ip-address.
+```bash
+ssh root@ip-address
+```
+**Note:** When you attempt to connect for the first time, SSH will display the authenticity message you provided. It shows the server's fingerprint, which is a unique identifier for the server's SSH key. You need to verify this fingerprint to ensure you're connecting to the correct server. Type in `yes` to continue.
+
+```bash
+The authenticity of host 'ip-address (ip-address)' can't be established.
+ED25519 key fingerprint is SHA256:oUuTnMQM2qCp7Oqip8gBpclMRBJFbL/hbQR5kbQnNOk.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? 
+```
+
+3. After confirming the authenticity of the server, SSH will prompt you to enter your password to log in.
+```bash
+root@ip-address's password:
+```
+
+If you provided the correct credentials, you should now be logged into the remote server, and you can start using it. You'll see the Ubuntu server terminal as below.
+
+```
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-52-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Oct 17 19:21:02 +08 2023
+
+  System load:           0.1962890625
+  Usage of /:            3.7% of 48.27GB
+  Memory usage:          10%
+  Swap usage:            0%
+  Processes:             95
+  Users logged in:       0
+  IPv4 address for eth0: ipv4-ipaddress
+  IPv6 address for eth0: ipv6-ipaddress
+
+
+0 updates can be applied immediately.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+Last login: Tue Nov  1 15:31:57 2022 from 104.208.107.150
+root@iot-middleware:~# 
+```
 
 ### Docker Installation
 
