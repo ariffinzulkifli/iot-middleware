@@ -74,12 +74,12 @@ module.exports = {
          * property can be used. See https://nodered.org/docs/security.html for details.
          */
         adminAuth: {
-           type: "credentials",
-           users: [{
-               username: "admin",
-               password: "$2b$08$zYxaWQQ2u1rAv1nYuVncCOcP7MwbSdhxpQunFu.S2OlzGuKwMl7Py",
-               permissions: "*"
-           }]
+            type: "credentials",
+            users: [{
+                username: "admin",
+                password: "$2b$08$zYxaWQQ2u1rAv1nYuVncCOcP7MwbSdhxpQunFu.S2OlzGuKwMl7Py",
+                permissions: "*"
+            }]
         },
     
         /** The following property can be used to enable HTTPS
