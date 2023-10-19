@@ -256,19 +256,17 @@ docker compose up -d
 Wait until all containers is successfully `Started` like below.
 
 ```
-[+] Running 15/15
- ✔ Network iot-middleware_iotstack                                    Created            0.2s 
- ✔ Volume "iot-middleware_influxdb-data"                              Created            0.0s 
- ✔ Volume "iot-middleware_redisdata"                                  Created            0.0s 
- ✔ Volume "iot-middleware_postgresqldata"                             Created            0.0s 
- ✔ Volume "iot-middleware_grafana-data"                               Created            0.0s 
- ✔ Container iot-middleware-grafana-1                                 Started            0.5s 
- ✔ Container iot-middleware-redis-1                                   Started            0.5s 
- ✔ Container iot-middleware-nodered-1                                 Started            0.5s 
- ✔ Container iot-middleware-mosquitto-1                               Started            0.5s 
- ✔ Container iot-middleware-influxdb-1                                Started            0.5s 
- ✔ Container iot-middleware-postgres-1                                Started            0.5s 
- ✔ Container iot-middleware-chirpstack-gateway-bridge-basicstation-1  Started            0.0s 
+[+] Running 13/13
+ ✔ Network iot-middleware_iotstack                                    Created            0.1s 
+ ✔ Container iot-middleware-mysql-1                                   Started            0.2s 
+ ✔ Container iot-middleware-postgres-1                                Started            0.2s 
+ ✔ Container iot-middleware-grafana-1                                 Started            0.2s 
+ ✔ Container iot-middleware-nodered-1                                 Started            0.2s 
+ ✔ Container iot-middleware-mosquitto-1                               Started            0.2s 
+ ✔ Container iot-middleware-adminer-1                                 Started            0.2s 
+ ✔ Container iot-middleware-redis-1                                   Started            0.2s 
+ ✔ Container iot-middleware-influxdb-1                                Started            0.2s 
+ ✔ Container iot-middleware-chirpstack-gateway-bridge-basicstation-1  Started            0.1s 
  ✔ Container iot-middleware-chirpstack-gateway-bridge-1               Started            0.0s 
  ✔ Container iot-middleware-chirpstack-1                              Started            0.0s 
  ✔ Container iot-middleware-chirpstack-rest-api-1                     Started            0.0s 
