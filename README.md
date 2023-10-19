@@ -14,10 +14,12 @@ ariffin@myduino.com
 
 This repository contains a skeleton to setup remote server to become a powerful IoT middleware along side with open-source server side applications below using [Docker Compose](https://docs.docker.com/compose/):
 - [Mosquitto](https://mosquitto.org/) for MQTT protocols
-- [Node-RED]() for Javascript low-code flow-based flow programming
-- [InfluxDB]() for time series database
-- [Grafana]() for interactive dashboard and
-- [Chirpstack]() for LoRaWAN Network Server
+- [Node-RED](https://nodered.org/) for Javascript low-code flow-based flow programming
+- [InfluxDB](https://www.influxdata.com/) for time series database
+- [MySQL](https://www.mysql.com/) for SQL database
+- [Adminer](https://www.adminer.org/) for SQL database management system
+- [Grafana](https://grafana.com/) for interactive dashboard and
+- [Chirpstack](https://www.chirpstack.io/) for LoRaWAN Network Server
 
 In Docker, each applications above is containerized into single image and it is readily available in [Docker Hub](https://hub.docker.com/). For example, everything you need to host Node-RED in a server including NodeJS and other libraries or dependencies is containerized as [nodered/node-red](https://hub.docker.com/r/nodered/node-red) image.
 
@@ -292,8 +294,11 @@ to access the applications in your browser.
 - Node-RED http://`ip-address`:1880
   - username: admin
   - password: password
-- InfluxDB http://`ip-address`:8087
+- InfluxDB http://`ip-address`:8086
   - username: admin
+  - password: password
+- Adminer http://`ip-address`:8060
+  - username: root
   - password: password
 - Grafana http://`ip-address`:3000
   - username: admin
@@ -303,11 +308,17 @@ to access the applications in your browser.
   - password: admin
 - Chirpstack REST API http://`ip-address`:8090
 
-While Mosquitto MQTT broker can be access by it's configuration below:
+Mosquitto MQTT broker can be access by it's configuration below:
 - host: `ip-address`
 - protocol: TCP
   - port: 1883
 - protocol: Websockets
   - port: 9001
 - username: admin
+- password: password
+
+MySQL database can be access by it's configuration below:
+- host: `ip-address`
+- port: 3306
+- username: root
 - password: password
