@@ -320,3 +320,13 @@ MySQL database can be access by it's configuration below:
 - port: 3306
 - username: root
 - password: password
+
+*Note:*: If you would like to run specific service only, such as `nodered` run the command below:
+```bash
+docker compose up -d nodered
+```
+
+or several services such as `nodered`, `mysql` and `adminer`:
+```bash
+docker compose up -d nodered mysql adminer
+```
