@@ -282,7 +282,7 @@ docker compose ps
 docker compose logs
 ```
 
-## Running Docker Compose Specific Container
+### Running Docker Compose Specific Container
 
 **Note:** If you would like to run a specific service only, such as `nodered`:
 ```bash
