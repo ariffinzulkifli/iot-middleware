@@ -282,6 +282,18 @@ docker compose ps
 docker compose logs
 ```
 
+## Running Docker Compose Specific Container
+
+**Note:** If you would like to run a specific service only, such as `nodered`:
+```bash
+docker compose up -d nodered
+```
+
+or several services such as `nodered`, `mysql` and `adminer`:
+```bash
+docker compose up -d nodered mysql adminer
+```
+
 ## Usage
 
 After all the Docker containers have been sucessfully initialized and started, you should be able
@@ -320,14 +332,3 @@ MySQL database can be access by it's configuration below:
 - port: 3306
 - username: root
 - password: password
-
-
-**Note:** If you would like to run specific service only, such as `nodered` run the command below:
-```bash
-docker compose up -d nodered
-```
-
-or several services such as `nodered`, `mysql` and `adminer`:
-```bash
-docker compose up -d nodered mysql adminer
-```
