@@ -322,7 +322,7 @@ MySQL database can be access by it's configuration below:
 - password: password
 
 
-**Note:**: If you would like to run specific service only, such as `nodered` run the command below:
+**Note:** If you would like to run specific service only, such as `nodered` run the command below:
 ```bash
 docker compose up -d nodered
 ```
