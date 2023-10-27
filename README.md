@@ -294,12 +294,74 @@ or several services such as `nodered`, `mysql` and `adminer`:
 docker compose up -d nodered mysql adminer
 ```
 
+## Run Docker on Raspberry Pi
+
+You would like to use Docker in Raspberry Pi?
+
+Here is the guide to install Docker supported 64-bit version of Debian Bullseye and Bookworm running on your Raspberry Pi. If you are unsure, you can check the architecture using the dpkg `--print-architecture` command.
+
+1. Update the package list to ensure you have the latest information about available packages:
+```bash
+sudo apt update
+```
+
+2. Install the required dependencies, including certificates, curl, and gnupg:
+```bash
+sudo apt install ca-certificates curl gnupg
+```
+
+3. Create a directory for Docker's keyring:
+```bash
+sudo install -m 0755 -d /etc/apt/keyrings
+```
+
+4. Download Docker's GPG key and save it to the keyring directory:
+```bash
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+```
+
+5. Set the appropriate permissions on the Docker GPG key:
+```bash
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+```
+
+6. Add the Docker repository to your package sources. This command will automatically detect your Raspberry Pi's architecture and OS version:
+```bash
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(. /etc/os-release && echo $VERSION_CODENAME) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+7. Update the package list again to include the Docker repository:
+```bash
+sudo apt update
+```
+
+8. Install Docker and related packages:
+```bash
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+9. Clone this repository into your server using the `git clone` command.
+```bash
+git clone https://github.com/ariffinzulkifli/iot-middleware.git
+```
+
+10. Change your working directory to the cloned repository directory.
+```bash
+cd ~/iot-middleware
+```
+
+11. Finally, launch the Docker Compose services defined in the `docker-compose.yml` file in detached mode.
+```bash
+sudo docker compose up -d
+```
+Wait until all containers is successfully `Started` and you can start using the services.
+
 ## Usage
 
 After all the Docker containers have been sucessfully initialized and started, you should be able
 to access the applications in your browser.
 
-**Note:** change the `ip-address` with your server ip-address.
+**Note:** change the `ip-address` with your server hostname or ip-address.
 
 - Node-RED http://`ip-address`:1880
   - username: admin
