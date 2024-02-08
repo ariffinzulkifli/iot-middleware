@@ -40,7 +40,6 @@ but keep in mind that for production usage it might need modifications, especial
 * `configuration/mosquitto`: directory containing the Mosquitto (MQTT broker) configuration
 * `configuration/nodered`: directory containing the Node-RED configuration
 * `configuration/postgresql/initdb/`: directory containing PostgreSQL initialization scripts
-* `lorawan-devices/`: directory for LoRaWAN devices
 
 ## Requirements
 
