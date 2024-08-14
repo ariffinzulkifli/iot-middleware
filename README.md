@@ -212,7 +212,7 @@ docker compose version
 You’ll see output like below, showing that Docker Compose is successfully installed with stated version:
 ```
 Output
-Docker Compose version v2.24.5
+Docker Compose version v2.29.1
 ```
 
 ## Running Docker Compose
