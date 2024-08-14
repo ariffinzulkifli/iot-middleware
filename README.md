@@ -196,7 +196,7 @@ mkdir -p ~/.docker/cli-plugins/
 
 2. Download the Docker Compose binary to the specified directory.
 ```bash
-curl -SL https://github.com/docker/compose/releases/download/v2.24.5/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+curl -SL https://github.com/docker/compose/releases/download/v2.29.1/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
 ```
 
 3. Make the downloaded Docker Compose binary executable.
