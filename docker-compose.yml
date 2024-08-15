@@ -73,7 +73,7 @@ services:
       - iotstack
   
   chirpstack:
-    image: chirpstack/chirpstack:4
+    image: chirpstack/chirpstack:latest
     command: -c /etc/chirpstack
     restart: unless-stopped
     volumes:
@@ -93,7 +93,7 @@ services:
       - iotstack
 
   chirpstack-gateway-bridge:
-    image: chirpstack/chirpstack-gateway-bridge:4
+    image: chirpstack/chirpstack-gateway-bridge:latest
     restart: unless-stopped
     ports:
       - 1700:1700/udp
@@ -109,7 +109,7 @@ services:
       - iotstack
   
   chirpstack-gateway-bridge-basicstation:
-    image: chirpstack/chirpstack-gateway-bridge:4
+    image: chirpstack/chirpstack-gateway-bridge:latest
     restart: unless-stopped
     command: -c /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge-basicstation-as923.toml
     ports:
@@ -122,7 +122,7 @@ services:
       - iotstack
 
   chirpstack-rest-api:
-    image: chirpstack/chirpstack-rest-api:4
+    image: chirpstack/chirpstack-rest-api:latest
     restart: unless-stopped
     command: --server chirpstack:8080 --bind 0.0.0.0:8090 --insecure
     ports:
