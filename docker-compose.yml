@@ -13,148 +13,148 @@ services:
     networks:
       - iotstack
   
-  # mosquitto:
-  #   image: eclipse-mosquitto:latest
-  #   restart: unless-stopped
-  #   ports:
-  #     - 1883:1883
-  #     - 9001:9001
-  #   volumes: 
-  #     - ./configuration/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
-  #     - ./configuration/mosquitto/password.txt:/mosquitto/config/password.txt
-  #   networks:
-  #     - iotstack
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    restart: unless-stopped
+    ports:
+      - 1883:1883
+      - 9001:9001
+    volumes: 
+      - ./configuration/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./configuration/mosquitto/password.txt:/mosquitto/config/password.txt
+    networks:
+      - iotstack
 
-  # influxdb:
-  #   image: influxdb:latest
-  #   restart: unless-stopped
-  #   environment:
-  #   - TZ=Asia/Kuala_Lumpur
-  #   - DOCKER_INFLUXDB_INIT_USERNAME=admin
-  #   - DOCKER_INFLUXDB_INIT_PASSWORD=password
-  #   - DOCKER_INFLUXDB_INIT_ORG=my-organisation
-  #   - DOCKER_INFLUXDB_INIT_BUCKET=iot-sensors
-  #   - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=A8C2B071-35F6-43F8-9F51-C5F584B2366B
-  #   - DOCKER_INFLUXDB_INIT_MODE=setup
-  #   # - DOCKER_INFLUXDB_INIT_MODE=upgrade
-  #   ports:
-  #     - '8086:8086'
-  #   # - ./volumes/influxdb.migrate/data:/var/lib/influxdb:ro
-  #   healthcheck:
-  #     test: ['CMD', 'influx', 'ping']
-  #     interval: 30s
-  #     timeout: 10s
-  #     retries: 3
-  #     start_period: 30s
-  #   networks:
-  #     - iotstack
+  influxdb:
+    image: influxdb:latest
+    restart: unless-stopped
+    environment:
+    - TZ=Asia/Kuala_Lumpur
+    - DOCKER_INFLUXDB_INIT_USERNAME=admin
+    - DOCKER_INFLUXDB_INIT_PASSWORD=password
+    - DOCKER_INFLUXDB_INIT_ORG=my-organisation
+    - DOCKER_INFLUXDB_INIT_BUCKET=iot-sensors
+    - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=A8C2B071-35F6-43F8-9F51-C5F584B2366B
+    - DOCKER_INFLUXDB_INIT_MODE=setup
+    # - DOCKER_INFLUXDB_INIT_MODE=upgrade
+    ports:
+      - '8086:8086'
+    # - ./volumes/influxdb.migrate/data:/var/lib/influxdb:ro
+    healthcheck:
+      test: ['CMD', 'influx', 'ping']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - iotstack
   
-  # grafana:
-  #   image: grafana/grafana:latest
-  #   restart: unless-stopped
-  #   environment:
-  #     - GF_SECURITY_ADMIN_PASSWORD=password
-  #   ports:
-  #     - '3000:3000'
-  #   networks:
-  #     - iotstack
+  grafana:
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=password
+    ports:
+      - '3000:3000'
+    networks:
+      - iotstack
   
-  # adminer:
-  #   image: adminer:latest
-  #   restart: unless-stopped
-  #   environment:
-  #     ADMINER_DEFAULT_SERVER: mysql
-  #   ports:
-  #     - 8060:8080
-  #   networks:
-  #     - iotstack
+  adminer:
+    image: adminer:latest
+    restart: unless-stopped
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql
+    ports:
+      - 8060:8080
+    networks:
+      - iotstack
 
-  # mysql:
-  #   image: mysql:latest
-  #   restart: unless-stopped
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: password
-  #     MYSQL_DATABASE: iot
-  #   ports:
-  #     - 3306:3306
-  #   networks:
-  #     - iotstack
+  mysql:
+    image: mysql:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: iot
+    ports:
+      - 3306:3306
+    networks:
+      - iotstack
   
-  # chirpstack:
-  #   image: chirpstack/chirpstack:latest
-  #   command: -c /etc/chirpstack
-  #   restart: unless-stopped
-  #   volumes:
-  #     - ./configuration/chirpstack:/etc/chirpstack
-  #     - ./configuration/lorawan-devices:/opt/lorawan-devices
-  #   depends_on:
-  #     - postgres
-  #     - mosquitto
-  #     - redis
-  #   environment:
-  #     - MQTT_BROKER_HOST=mosquitto
-  #     - REDIS_HOST=redis
-  #     - POSTGRESQL_HOST=postgres
-  #   ports:
-  #     - 8080:8080
-  #   networks:
-  #     - iotstack
+  chirpstack:
+    image: chirpstack/chirpstack:latest
+    command: -c /etc/chirpstack
+    restart: unless-stopped
+    volumes:
+      - ./configuration/chirpstack:/etc/chirpstack
+      - ./configuration/lorawan-devices:/opt/lorawan-devices
+    depends_on:
+      - postgres
+      - mosquitto
+      - redis
+    environment:
+      - MQTT_BROKER_HOST=mosquitto
+      - REDIS_HOST=redis
+      - POSTGRESQL_HOST=postgres
+    ports:
+      - 8080:8080
+    networks:
+      - iotstack
 
-  # chirpstack-gateway-bridge:
-  #   image: chirpstack/chirpstack-gateway-bridge:latest
-  #   restart: unless-stopped
-  #   ports:
-  #     - 1700:1700/udp
-  #   volumes:
-  #     - ./configuration/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
-  #   environment:
-  #     - INTEGRATION__MQTT__EVENT_TOPIC_TEMPLATE=as923/gateway/{{ .GatewayID }}/event/{{ .EventType }}
-  #     - INTEGRATION__MQTT__STATE_TOPIC_TEMPLATE=as923/gateway/{{ .GatewayID }}/state/{{ .StateType }}
-  #     - INTEGRATION__MQTT__COMMAND_TOPIC_TEMPLATE=as923/gateway/{{ .GatewayID }}/command/#
-  #   depends_on:
-  #     - mosquitto
-  #   networks:
-  #     - iotstack
+  chirpstack-gateway-bridge:
+    image: chirpstack/chirpstack-gateway-bridge:latest
+    restart: unless-stopped
+    ports:
+      - 1700:1700/udp
+    volumes:
+      - ./configuration/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
+    environment:
+      - INTEGRATION__MQTT__EVENT_TOPIC_TEMPLATE=as923/gateway/{{ .GatewayID }}/event/{{ .EventType }}
+      - INTEGRATION__MQTT__STATE_TOPIC_TEMPLATE=as923/gateway/{{ .GatewayID }}/state/{{ .StateType }}
+      - INTEGRATION__MQTT__COMMAND_TOPIC_TEMPLATE=as923/gateway/{{ .GatewayID }}/command/#
+    depends_on:
+      - mosquitto
+    networks:
+      - iotstack
   
-  # chirpstack-gateway-bridge-basicstation:
-  #   image: chirpstack/chirpstack-gateway-bridge:latest
-  #   restart: unless-stopped
-  #   command: -c /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge-basicstation-as923.toml
-  #   ports:
-  #     - 3001:3001
-  #   volumes:
-  #     - ./configuration/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
-  #   depends_on:
-  #     - mosquitto
-  #   networks:
-  #     - iotstack
+  chirpstack-gateway-bridge-basicstation:
+    image: chirpstack/chirpstack-gateway-bridge:latest
+    restart: unless-stopped
+    command: -c /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge-basicstation-as923.toml
+    ports:
+      - 3001:3001
+    volumes:
+      - ./configuration/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
+    depends_on:
+      - mosquitto
+    networks:
+      - iotstack
 
-  # chirpstack-rest-api:
-  #   image: chirpstack/chirpstack-rest-api:latest
-  #   restart: unless-stopped
-  #   command: --server chirpstack:8080 --bind 0.0.0.0:8090 --insecure
-  #   ports:
-  #     - 8090:8090
-  #   depends_on:
-  #     - chirpstack
-  #   networks:
-  #     - iotstack
+  chirpstack-rest-api:
+    image: chirpstack/chirpstack-rest-api:latest
+    restart: unless-stopped
+    command: --server chirpstack:8080 --bind 0.0.0.0:8090 --insecure
+    ports:
+      - 8090:8090
+    depends_on:
+      - chirpstack
+    networks:
+      - iotstack
 
-  # postgres:
-  #   image: postgres:latest
-  #   restart: unless-stopped
-  #   volumes:
-  #     - ./configuration/postgresql/initdb:/docker-entrypoint-initdb.d
-  #   environment:
-  #     - POSTGRES_PASSWORD=password
-  #   networks:
-  #     - iotstack
+  postgres:
+    image: postgres:latest
+    restart: unless-stopped
+    volumes:
+      - ./configuration/postgresql/initdb:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_PASSWORD=password
+    networks:
+      - iotstack
 
-  # redis:
-  #   image: redis:latest
-  #   restart: unless-stopped
-  #   networks:
-  #     - iotstack
+  redis:
+    image: redis:latest
+    restart: unless-stopped
+    networks:
+      - iotstack
 
 networks:
   iotstack:
