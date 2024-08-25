@@ -8,6 +8,18 @@ services:
       - ./configuration/nodered/settings.js:/data/settings.js
     networks:
       - iotstack
+  
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    restart: unless-stopped
+    ports:
+      - 1883:1883
+      - 9001:9001
+    volumes: 
+      - ./configuration/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./configuration/mosquitto/password.txt:/mosquitto/config/password.txt
+    networks:
+      - iotstack
 
   influxdb:
     image: influxdb:latest
@@ -23,10 +35,6 @@ services:
     # - DOCKER_INFLUXDB_INIT_MODE=upgrade
     ports:
       - '8086:8086'
-    volumes:
-      - ./volumes/influxdb2/data:/var/lib/influxdb2
-      - ./volumes/influxdb2/config:/etc/influxdb2
-      - ./volumes/influxdb2/backup:/var/lib/backup
     # - ./volumes/influxdb.migrate/data:/var/lib/influxdb:ro
     healthcheck:
       test: ['CMD', 'influx', 'ping']
@@ -36,17 +44,14 @@ services:
       start_period: 30s
     networks:
       - iotstack
-
-  mysql:
-    image: mysql:latest
+  
+  grafana:
+    image: grafana/grafana:latest
     restart: unless-stopped
-    command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_ROOT_PASSWORD: 'password'
+      - GF_SECURITY_ADMIN_PASSWORD=password
     ports:
-      - 3306:3306
-    volumes:
-      - mysql-data:/var/lib/mysql
+      - '3000:3000'
     networks:
       - iotstack
   
@@ -59,16 +64,15 @@ services:
       - 8060:8080
     networks:
       - iotstack
-  
-  grafana:
-    image: grafana/grafana:latest
+
+  mysql:
+    image: mysql:latest
     restart: unless-stopped
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=password
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: iot
     ports:
-      - '3000:3000'
-    volumes:
-      - grafana-data:/var/lib/grafana
+      - 3306:3306
     networks:
       - iotstack
   
@@ -137,7 +141,6 @@ services:
     restart: unless-stopped
     volumes:
       - ./configuration/postgresql/initdb:/docker-entrypoint-initdb.d
-      - postgresql-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=password
     networks:
@@ -146,29 +149,9 @@ services:
   redis:
     image: redis:latest
     restart: unless-stopped
-    volumes:
-      - redis-data:/data
-    networks:
-      - iotstack
-
-  mosquitto:
-    image: eclipse-mosquitto:latest
-    restart: unless-stopped
-    ports:
-      - 1883:1883
-      - 9001:9001
-    volumes: 
-      - ./configuration/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
-      - ./configuration/mosquitto/password.txt:/mosquitto/config/password.txt
     networks:
       - iotstack
 
 networks:
   iotstack:
     driver: bridge
-
-volumes:
-  mysql-data:
-  grafana-data:
-  postgresql-data:
-  redis-data:
