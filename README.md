@@ -14,7 +14,7 @@ ariffin@myduino.com
 
 This repository contains a skeleton to setup remote server to become a powerful IoT middleware along side with open-source server side applications below using [Docker Compose](https://docs.docker.com/compose/):
 - [Mosquitto](https://mosquitto.org/) for MQTT protocols
-- [Node-RED](https://nodered.org/) for Javascript low-code flow-based flow programming
+- [Node-RED](https://nodered.org/) for Javascript low-code flow-based flow programming with ready `dashboard`, `telegrambot`, `influxdb`, and `mysql` modules. 
 - [InfluxDB](https://www.influxdata.com/) for time series database
 - [MySQL](https://www.mysql.com/) for SQL database
 - [Adminer](https://www.adminer.org/) for SQL database management system
