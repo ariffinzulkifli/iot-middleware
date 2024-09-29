@@ -368,6 +368,9 @@ to access the applications in your browser.
 - InfluxDB http://`ip-address`:8086
   - username: admin
   - password: password
+  - bucket name: iot-sensors
+  - organisation name: my-organisation
+  - admin token: A8C2B071-35F6-43F8-9F51-C5F584B2366B
 - Adminer http://`ip-address`:8060
   - username: root
   - password: password
