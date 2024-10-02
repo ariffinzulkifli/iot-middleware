@@ -293,11 +293,6 @@ or several services such as `nodered`, `mysql` and `adminer`:
 docker compose up -d nodered mysql adminer
 ```
 
-or several services such as `nodered`, `mosquitto` and `influxdb`:
-```bash
-docker compose up -d nodered mosquitto influxdb
-```
-
 ## Run Docker on Raspberry Pi
 
 You would like to use Docker in Raspberry Pi?
