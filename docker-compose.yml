@@ -1,8 +1,9 @@
 services:
   nodered:
-    build:
-        dockerfile: Dockerfile
-    image: nodered
+    # build:
+    #     dockerfile: Dockerfile
+    # image: nodered
+    image: nodered/node-red:latest
     environment:
       - TZ=Asia/Kuala_Lumpur
     restart: unless-stopped
@@ -36,10 +37,8 @@ services:
     - DOCKER_INFLUXDB_INIT_BUCKET=iot-sensors
     - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=A8C2B071-35F6-43F8-9F51-C5F584B2366B
     - DOCKER_INFLUXDB_INIT_MODE=setup
-    # - DOCKER_INFLUXDB_INIT_MODE=upgrade
     ports:
       - '8086:8086'
-    # - ./volumes/influxdb.migrate/data:/var/lib/influxdb:ro
     healthcheck:
       test: ['CMD', 'influx', 'ping']
       interval: 30s
@@ -73,8 +72,9 @@ services:
     image: mysql:latest
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: iot
+      - TZ=Asia/Kuala_Lumpur
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=iot
     ports:
       - 3306:3306
     networks:
