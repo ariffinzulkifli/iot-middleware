@@ -6,7 +6,7 @@ services:
     image: nodered/node-red:latest
     environment:
       - TZ=Asia/Kuala_Lumpur
-    restart: unless-stopped
+    restart: always
     ports:
       - 1880:1880
     volumes:
@@ -16,7 +16,7 @@ services:
   
   mosquitto:
     image: eclipse-mosquitto:latest
-    restart: unless-stopped
+    restart: always
     ports:
       - 1883:1883
       - 9001:9001
@@ -28,7 +28,7 @@ services:
 
   influxdb:
     image: influxdb:latest
-    restart: unless-stopped
+    restart: always
     environment:
     - TZ=Asia/Kuala_Lumpur
     - DOCKER_INFLUXDB_INIT_USERNAME=admin
@@ -50,7 +50,7 @@ services:
   
   grafana:
     image: grafana/grafana:latest
-    restart: unless-stopped
+    restart: always
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=password
     ports:
@@ -60,7 +60,7 @@ services:
   
   adminer:
     image: adminer:latest
-    restart: unless-stopped
+    restart: always
     environment:
       ADMINER_DEFAULT_SERVER: mysql
     ports:
@@ -70,7 +70,7 @@ services:
 
   mysql:
     image: mysql:latest
-    restart: unless-stopped
+    restart: always
     environment:
       - TZ=Asia/Kuala_Lumpur
       - MYSQL_ROOT_PASSWORD=password
@@ -83,7 +83,7 @@ services:
   chirpstack:
     image: chirpstack/chirpstack:latest
     command: -c /etc/chirpstack
-    restart: unless-stopped
+    restart: always
     volumes:
       - ./configuration/chirpstack:/etc/chirpstack
       - ./configuration/lorawan-devices:/opt/lorawan-devices
@@ -102,7 +102,7 @@ services:
 
   chirpstack-gateway-bridge:
     image: chirpstack/chirpstack-gateway-bridge:latest
-    restart: unless-stopped
+    restart: always
     ports:
       - 1700:1700/udp
     volumes:
@@ -118,7 +118,7 @@ services:
   
   chirpstack-gateway-bridge-basicstation:
     image: chirpstack/chirpstack-gateway-bridge:latest
-    restart: unless-stopped
+    restart: always
     command: -c /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge-basicstation-as923.toml
     ports:
       - 3001:3001
@@ -131,7 +131,7 @@ services:
 
   chirpstack-rest-api:
     image: chirpstack/chirpstack-rest-api:latest
-    restart: unless-stopped
+    restart: always
     command: --server chirpstack:8080 --bind 0.0.0.0:8090 --insecure
     ports:
       - 8090:8090
@@ -142,7 +142,7 @@ services:
 
   postgres:
     image: postgres:latest
-    restart: unless-stopped
+    restart: always
     volumes:
       - ./configuration/postgresql/initdb:/docker-entrypoint-initdb.d
     environment:
@@ -152,7 +152,7 @@ services:
 
   redis:
     image: redis:latest
-    restart: unless-stopped
+    restart: always
     networks:
       - iotstack
 
