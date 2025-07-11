@@ -1,4 +1,5 @@
 services:
+  # Scripting
   nodered:
     # build:
     #     dockerfile: Dockerfile
@@ -6,7 +7,7 @@ services:
     image: nodered/node-red:latest
     environment:
       - TZ=Asia/Kuala_Lumpur
-    restart: always
+    restart: unless-stopped
     ports:
       - 1880:1880
     volumes:
@@ -14,9 +15,10 @@ services:
     networks:
       - iotstack
   
+  # MQTT
   mosquitto:
     image: eclipse-mosquitto:latest
-    restart: always
+    restart: unless-stopped
     ports:
       - 1883:1883
       - 9001:9001
@@ -25,10 +27,68 @@ services:
       - ./configuration/mosquitto/password.txt:/mosquitto/config/password.txt
     networks:
       - iotstack
+  
+  emqx:
+    image: emqx/emqx:latest
+    container_name: emqx
+    restart: unless-stopped
+    ports:
+      - "1884:1883"     # MQTT
+      - "8084:8083"     # MQTT over WebSocket
+      - "18083:18083"   # Dashboard
+    environment:
+      - TZ=Asia/Kuala_Lumpur
+      - EMQX_NAME=emqx
+      - EMQX_ALLOW_ANONYMOUS=false
+      - EMQX_DASHBOARD__DEFAULT_USERNAME=admin
+      - EMQX_DASHBOARD__DEFAULT_PASSWORD=password
+    networks:
+      - iotstack
+  
+  # Database and DBMS
+  mysql:
+    image: mysql:latest
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Kuala_Lumpur
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=iot
+    ports:
+      - 3306:3306
+    networks:
+      - iotstack
+  adminer:
+    image: adminer:latest
+    restart: unless-stopped
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql
+    ports:
+      - 8060:8080
+    networks:
+      - iotstack
+
+  postgres:
+    image: postgres:latest
+    restart: unless-stopped
+    volumes:
+      - ./configuration/postgresql/initdb:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_PASSWORD=password
+      - TZ=Asia/Kuala_Lumpur
+    networks:
+      - iotstack
+
+  redis:
+    image: redis:latest
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Kuala_Lumpur
+    networks:
+      - iotstack
 
   influxdb:
     image: influxdb:latest
-    restart: always
+    restart: unless-stopped
     environment:
     - TZ=Asia/Kuala_Lumpur
     - DOCKER_INFLUXDB_INIT_USERNAME=admin
@@ -48,42 +108,23 @@ services:
     networks:
       - iotstack
   
+  # Dashboard
   grafana:
     image: grafana/grafana:latest
-    restart: always
+    restart: unless-stopped
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=password
+      - TZ=Asia/Kuala_Lumpur
     ports:
       - '3000:3000'
     networks:
       - iotstack
   
-  adminer:
-    image: adminer:latest
-    restart: always
-    environment:
-      ADMINER_DEFAULT_SERVER: mysql
-    ports:
-      - 8060:8080
-    networks:
-      - iotstack
-
-  mysql:
-    image: mysql:latest
-    restart: always
-    environment:
-      - TZ=Asia/Kuala_Lumpur
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=iot
-    ports:
-      - 3306:3306
-    networks:
-      - iotstack
-  
+  # LoRaWAN Network Server
   chirpstack:
     image: chirpstack/chirpstack:latest
     command: -c /etc/chirpstack
-    restart: always
+    restart: unless-stopped
     volumes:
       - ./configuration/chirpstack:/etc/chirpstack
       - ./configuration/lorawan-devices:/opt/lorawan-devices
@@ -92,6 +133,7 @@ services:
       - mosquitto
       - redis
     environment:
+      - TZ=Asia/Kuala_Lumpur
       - MQTT_BROKER_HOST=mosquitto
       - REDIS_HOST=redis
       - POSTGRESQL_HOST=postgres
@@ -102,12 +144,13 @@ services:
 
   chirpstack-gateway-bridge:
     image: chirpstack/chirpstack-gateway-bridge:latest
-    restart: always
+    restart: unless-stopped
     ports:
       - 1700:1700/udp
     volumes:
       - ./configuration/chirpstack-gateway-bridge:/etc/chirpstack-gateway-bridge
     environment:
+      - TZ=Asia/Kuala_Lumpur
       - INTEGRATION__MQTT__EVENT_TOPIC_TEMPLATE=as923/gateway/{{ .GatewayID }}/event/{{ .EventType }}
       - INTEGRATION__MQTT__STATE_TOPIC_TEMPLATE=as923/gateway/{{ .GatewayID }}/state/{{ .StateType }}
       - INTEGRATION__MQTT__COMMAND_TOPIC_TEMPLATE=as923/gateway/{{ .GatewayID }}/command/#
@@ -118,8 +161,10 @@ services:
   
   chirpstack-gateway-bridge-basicstation:
     image: chirpstack/chirpstack-gateway-bridge:latest
-    restart: always
+    restart: unless-stopped
     command: -c /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge-basicstation-as923.toml
+    environment:
+      - TZ=Asia/Kuala_Lumpur
     ports:
       - 3001:3001
     volumes:
@@ -131,28 +176,14 @@ services:
 
   chirpstack-rest-api:
     image: chirpstack/chirpstack-rest-api:latest
-    restart: always
+    restart: unless-stopped
     command: --server chirpstack:8080 --bind 0.0.0.0:8090 --insecure
+    environment:
+      - TZ=Asia/Kuala_Lumpur
     ports:
       - 8090:8090
     depends_on:
       - chirpstack
-    networks:
-      - iotstack
-
-  postgres:
-    image: postgres:latest
-    restart: always
-    volumes:
-      - ./configuration/postgresql/initdb:/docker-entrypoint-initdb.d
-    environment:
-      - POSTGRES_PASSWORD=password
-    networks:
-      - iotstack
-
-  redis:
-    image: redis:latest
-    restart: always
     networks:
       - iotstack
 
