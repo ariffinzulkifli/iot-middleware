@@ -13,11 +13,13 @@ ariffin@myduino.com
 # Docker IoT Middleware
 
 This repository contains a skeleton to setup remote server to become a powerful IoT middleware along side with open-source server side applications below using [Docker Compose](https://docs.docker.com/compose/):
+- [Node-RED](https://nodered.org/) for Javascript low-code flow-based flow programming. If you would like to preinstalled with ready `dashboard`, `telegrambot`, `influxdb`, and `mysql` modules, uncomment build nodered with Dockerfile.
 - [Mosquitto](https://mosquitto.org/) for MQTT protocols
-- [Node-RED](https://nodered.org/) for Javascript low-code flow-based flow programming with ready `dashboard`, `telegrambot`, `influxdb`, and `mysql` modules. 
-- [InfluxDB](https://www.influxdata.com/) for time series database
+- [EMQX](https://www.emqx.com/) for MQTT protocols and web-based management
 - [MySQL](https://www.mysql.com/) for SQL database
 - [Adminer](https://www.adminer.org/) for SQL database management system
+- [InfluxDB](https://www.influxdata.com/) for time series database
+- [Redis](https://redis.io/) for memory key-value database
 - [Grafana](https://grafana.com/) for interactive dashboard and
 - [Chirpstack](https://www.chirpstack.io/) for LoRaWAN Network Server
 
@@ -39,7 +41,7 @@ but keep in mind that for production usage it might need modifications, especial
 * `configuration/chirpstack-gateway-bridge`: directory containing the ChirpStack Gateway Bridge configuration
 * `configuration/mosquitto`: directory containing the Mosquitto (MQTT broker) configuration
 * `configuration/nodered`: directory containing the Node-RED configuration
-* `configuration/postgresql/initdb/`: directory containing PostgreSQL initialization scripts
+* `configuration/postgresql`: directory containing PostgreSQL initialization scripts
 
 ## Requirements
 
@@ -196,7 +198,7 @@ mkdir -p ~/.docker/cli-plugins/
 
 2. Download the Docker Compose binary to the specified directory.
 ```bash
-curl -SL https://github.com/docker/compose/releases/download/v2.29.7/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+curl -SL https://github.com/docker/compose/releases/download/v2.38.2/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
 ```
 
 3. Make the downloaded Docker Compose binary executable.
@@ -212,7 +214,7 @@ docker compose version
 You’ll see output like below, showing that Docker Compose is successfully installed with stated version:
 ```
 Output
-Docker Compose version v2.29.7
+Docker Compose version v2.38.2
 ```
 
 ## Running Docker Compose
@@ -234,8 +236,6 @@ cat docker-compose.yml
 
 You’ll see output like below.
 ```
-version: "3"
-
 services:
   nodered:
     image: nodered/node-red:latest
@@ -370,6 +370,9 @@ to access the applications in your browser.
 - Node-RED http://`ip-address`:1880
   - username: admin
   - password: password
+- EMQX http://`ip-address`:18083
+  - username: admin
+  - password: password
 - InfluxDB http://`ip-address`:8086
   - username: admin
   - password: password
@@ -395,6 +398,13 @@ Mosquitto MQTT broker can be access by it's configuration below:
   - port: 9001
 - username: admin
 - password: password
+
+EMQX MQTT broker can be access by it's configuration below:
+- host: `ip-address`
+- protocol: TCP
+  - port: 1884
+- protocol: Websockets
+  - port: 8084
 
 MySQL database can be access by it's configuration below:
 - host: `ip-address`
