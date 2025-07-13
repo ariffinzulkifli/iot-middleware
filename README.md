@@ -4,7 +4,7 @@
  / /|_/ / // / _  / // / / _ \/ _ \
 /_/  /_/\_, /\_,_/\_,_/_/_//_/\___/
        /___/                       
-ai.iot.education.solutions.marketplace =================================================
+ai.iot.education.solutions.marketplace ========================================================
 
 Ts. Mohamad Ariffin Zulkifli
 ariffin@myduino.com
