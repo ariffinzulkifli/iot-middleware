@@ -61,7 +61,7 @@ This guide will guide you through the steps to remote SSH your Ubuntu server.
 
 1. Open Terminal on your PC.
 
-**Note:** You can use any suitable software such as [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.3), [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html), [Cmder](https://github.com/cmderdev/cmder), etc.
+**Note:** You can use any suitable software such as [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows), [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html), [Cmder](https://github.com/cmderdev/cmder), etc.
 
 2. Use the SSH command to connect to the remote server.
 
