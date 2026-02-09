@@ -87,9 +87,19 @@ Wait until all containers is successfully `Created` like below.
 
 ![Docker Desktop](images/docker-desktop.png)
 
-7. Access the services by clicking on the port link in Docker Desktop or open your browser and navigate to the service URL. For example, Node-RED can be accessed at http://localhost:1880.
+7. Access the services by clicking on the port link in Docker Desktop or open your browser and navigate to the service URL.
 
+Node-RED http://localhost:1880
 ![Docker Desktop Node-RED](images/docker-desktop-nodered.png)
+
+InfluxDB http://localhost:8086
+![Docker Desktop InfluxDB](images/docker-desktop-influxdb.png)
+
+Grafana http://localhost:3000
+![Docker Desktop Grafana](images/docker-desktop-grafana.png)
+
+Adminer http://localhost:8060
+![Docker Desktop Adminer](images/docker-desktop-adminer.png)
 
 You can also verify the containers using command like below:
 ```bash
