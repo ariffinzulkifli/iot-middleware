@@ -38,21 +38,124 @@ but keep in mind that for production usage it might need modifications, especial
 * `configuration/mosquitto`: directory containing the Mosquitto (MQTT broker) configuration
 * `configuration/nodered`: directory containing the Node-RED configuration
 
-## Requirements
+## Installation
 
-Before using this `docker-compose.yml` file, make sure you have a remote server by cloud hosting service like [GBCloud](https://billing.gbcloud.net/aff.php?aff=87) and [Docker](https://www.docker.com/community-edition) installed in the server.
+**Prerequisites:** [Git](https://git-scm.com/) must be installed on your system.
 
-### Create Account on GBCloud
+Choose the installation guide that matches your platform:
 
-This guide will guide you through the steps to create account on GBCloud.
+### Option 1: PC or Mac (Docker Desktop)
+
+1. Download and install [Docker Desktop](https://www.docker.com/products/docker-desktop/) for your operating system (Windows or Mac).
+
+2. Make sure Docker Desktop is running.
+
+3. Open Terminal (Mac) or PowerShell (Windows) and clone this repository.
+```bash
+git clone https://github.com/ariffinzulkifli/iot-middleware.git
+```
+
+4. Change your working directory to the cloned repository directory.
+```bash
+cd iot-middleware
+```
+
+5. Launch the Docker Compose services in detached mode.
+```bash
+docker compose up -d
+```
+Wait until all containers is successfully `Started` like below.
+
+```
+[+] Running 7/7
+ ✔ Network iot-middleware_iotstack                                    Created            0.1s
+ ✔ Container iot-middleware-mosquitto-1                               Started            0.2s
+ ✔ Container iot-middleware-influxdb-1                                Started            0.2s
+ ✔ Container iot-middleware-nodered-1                                 Started            0.2s
+ ✔ Container iot-middleware-grafana-1                                 Started            0.2s
+ ✔ Container iot-middleware-mysql-1                                   Started            0.2s
+ ✔ Container iot-middleware-adminer-1                                 Started            0.2s
+```
+
+6. Verify that the Docker Compose containers are running.
+```bash
+docker compose ps
+```
+
+7. View the logs of the Docker Compose containers to monitor their output and any potential issues.
+```bash
+docker compose logs
+```
+
+### Option 2: Raspberry Pi (Terminal)
+
+Here is the guide to install Docker on a 64-bit version of Debian Bullseye or Bookworm running on your Raspberry Pi. If you are unsure, you can check the architecture using the `dpkg --print-architecture` command.
+
+1. Update the package list to ensure you have the latest information about available packages:
+```bash
+sudo apt update
+```
+
+2. Install the required dependencies, including certificates, curl, and gnupg:
+```bash
+sudo apt install ca-certificates curl gnupg
+```
+
+3. Create a directory for Docker's keyring:
+```bash
+sudo install -m 0755 -d /etc/apt/keyrings
+```
+
+4. Download Docker's GPG key and save it to the keyring directory:
+```bash
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+```
+
+5. Set the appropriate permissions on the Docker GPG key:
+```bash
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+```
+
+6. Add the Docker repository to your package sources. This command will automatically detect your Raspberry Pi's architecture and OS version:
+```bash
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(. /etc/os-release && echo $VERSION_CODENAME) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+7. Update the package list again to include the Docker repository:
+```bash
+sudo apt update
+```
+
+8. Install Docker and related packages:
+```bash
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+9. Clone this repository.
+```bash
+git clone https://github.com/ariffinzulkifli/iot-middleware.git
+```
+
+10. Change your working directory to the cloned repository directory.
+```bash
+cd ~/iot-middleware
+```
+
+11. Launch the Docker Compose services in detached mode.
+```bash
+sudo docker compose up -d
+```
+Wait until all containers is successfully `Started` and you can start using the services.
+
+### Option 3: VPS Cloud Server (GBCloud)
+
+#### Create Account on GBCloud
 
 1. Click the `Create account` link on [GBCloud](https://billing.gbcloud.net/aff.php?aff=87) login page.
 2. Fill in your `Personal Information`, `Billing Address`, `Additional Information` and `Account Security`.
 3. Check the `I have read and agree to the Terms of Service`. and click the `Register` button.
 
-### Remote SSH Ubuntu Server
-
-This guide will guide you through the steps to remote SSH your Ubuntu server.
+#### Remote SSH Ubuntu Server
 
 1. Open Terminal on your PC.
 
@@ -70,7 +173,7 @@ ssh root@ip-address
 The authenticity of host 'ip-address (ip-address)' can't be established.
 ED25519 key fingerprint is SHA256:oUuTnMQM2qCp7Oqip8gBpclMRBJFbL/hbQR5kbQnNOk.
 This key is not known by any other names.
-Are you sure you want to continue connecting (yes/no/[fingerprint])? 
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
 ```
 
 3. After confirming the authenticity of the server, SSH will prompt you to enter your password to log in.
@@ -106,12 +209,10 @@ The list of available updates is more than a week old.
 To check for new updates run: sudo apt update
 
 Last login: Tue Nov  1 15:31:57 2022 from 104.208.107.150
-root@iot-middleware:~# 
+root@iot-middleware:~#
 ```
 
-### Docker Installation
-
-This guide will walk you through the steps to install Docker on Ubuntu.
+#### Docker Installation
 
 1. Update the package list to ensure you have the latest information about available packages.
 ```bash
@@ -182,9 +283,7 @@ TriggeredBy: ● docker.socket
 ```
 Hold `Ctrl + C` on keyboard to exit the status back to terminal prompt.
 
-### Docker Compose Installation
-
-Once Docker successfully installed, let's walk through the steps to install Docker Compose.
+#### Docker Compose Installation
 
 1. Make sure the directory where Docker Compose should be installed exists. This command creates the necessary directory if it doesn't exist.
 ```bash
@@ -206,15 +305,15 @@ chmod +x ~/.docker/cli-plugins/docker-compose
 docker compose version
 ```
 
-You’ll see output like below, showing that Docker Compose is successfully installed with stated version:
+You'll see output like below, showing that Docker Compose is successfully installed with stated version:
 ```
 Output
 Docker Compose version v2.38.2
 ```
 
-## Running Docker Compose
+#### Clone and Run
 
-1. Clone this repository into your server using the `git clone` command.
+1. Clone this repository into your server.
 ```bash
 git clone https://github.com/ariffinzulkifli/iot-middleware.git
 ```
@@ -224,26 +323,7 @@ git clone https://github.com/ariffinzulkifli/iot-middleware.git
 cd ~/iot-middleware
 ```
 
-3. Inspect the contents of the Docker Compose file `docker-compose.yml` to understand the services and configurations defined in it.
-```bash
-cat docker-compose.yml
-```
-
-You’ll see output like below.
-```
-services:
-  nodered:
-    image: nodered/node-red:latest
-    restart: unless-stopped
-    ports:
-      - 1880:1880
-    volumes:
-      - ./configuration/nodered/settings.js:/data/settings.js
-    networks:
-      - iotstack
-```
-
-4. Launch the Docker Compose services defined in the `docker-compose.yml` file in detached mode.
+3. Launch the Docker Compose services in detached mode.
 ```bash
 docker compose up -d
 ```
@@ -252,25 +332,25 @@ Wait until all containers is successfully `Started` like below.
 ```
 [+] Running 7/7
  ✔ Network iot-middleware_iotstack                                    Created            0.1s
- ✔ Container iot-middleware-nodered-1                                 Started            0.2s
  ✔ Container iot-middleware-mosquitto-1                               Started            0.2s
-✔ Container iot-middleware-mysql-1                                   Started            0.2s
- ✔ Container iot-middleware-adminer-1                                 Started            0.2s
  ✔ Container iot-middleware-influxdb-1                                Started            0.2s
+ ✔ Container iot-middleware-nodered-1                                 Started            0.2s
  ✔ Container iot-middleware-grafana-1                                 Started            0.2s
+ ✔ Container iot-middleware-mysql-1                                   Started            0.2s
+ ✔ Container iot-middleware-adminer-1                                 Started            0.2s
 ```
 
-5. Verify that the Docker Compose containers are running using the following command.
+4. Verify that the Docker Compose containers are running.
 ```bash
 docker compose ps
 ```
 
-6. View the logs of the Docker Compose containers to monitor their output and any potential issues.
+5. View the logs of the Docker Compose containers to monitor their output and any potential issues.
 ```bash
 docker compose logs
 ```
 
-### Running Docker Compose Specific Container
+### Running Specific Containers
 
 **Note:** If you would like to run a specific service only, such as `nodered`:
 ```bash
@@ -286,68 +366,6 @@ or several services such as `nodered`, `mosquitto` and `influxdb`:
 ```bash
 docker compose up -d nodered mosquitto influxdb
 ```
-
-## Run Docker on Raspberry Pi
-
-You would like to use Docker in Raspberry Pi?
-
-Here is the guide to install Docker supported 64-bit version of Debian Bullseye and Bookworm running on your Raspberry Pi. If you are unsure, you can check the architecture using the dpkg `--print-architecture` command.
-
-1. Update the package list to ensure you have the latest information about available packages:
-```bash
-sudo apt update
-```
-
-2. Install the required dependencies, including certificates, curl, and gnupg:
-```bash
-sudo apt install ca-certificates curl gnupg
-```
-
-3. Create a directory for Docker's keyring:
-```bash
-sudo install -m 0755 -d /etc/apt/keyrings
-```
-
-4. Download Docker's GPG key and save it to the keyring directory:
-```bash
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-```
-
-5. Set the appropriate permissions on the Docker GPG key:
-```bash
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
-```
-
-6. Add the Docker repository to your package sources. This command will automatically detect your Raspberry Pi's architecture and OS version:
-```bash
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(. /etc/os-release && echo $VERSION_CODENAME) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-```
-
-7. Update the package list again to include the Docker repository:
-```bash
-sudo apt update
-```
-
-8. Install Docker and related packages:
-```bash
-sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-```
-
-9. Clone this repository into your server using the `git clone` command.
-```bash
-git clone https://github.com/ariffinzulkifli/iot-middleware.git
-```
-
-10. Change your working directory to the cloned repository directory.
-```bash
-cd ~/iot-middleware
-```
-
-11. Finally, launch the Docker Compose services defined in the `docker-compose.yml` file in detached mode.
-```bash
-sudo docker compose up -d
-```
-Wait until all containers is successfully `Started` and you can start using the services.
 
 ## Usage
 
