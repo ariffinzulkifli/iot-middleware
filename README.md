@@ -12,21 +12,22 @@ ariffin@myduino.com
 
 # Docker IoT Middleware
 
-This repository contains a skeleton to setup remote server to become a powerful IoT middleware along side with open-source server side applications below using [Docker Compose](https://docs.docker.com/compose/):
-- [Mosquitto](https://mosquitto.org/) for MQTT protocols
-- [InfluxDB](https://www.influxdata.com/) for time series database
-- [Node-RED](https://nodered.org/) for Javascript low-code flow-based flow programming
-- [Grafana](https://grafana.com/) for interactive dashboard
+This repository contains a skeleton to setup a remote server to become a powerful IoT middleware using [Docker Compose](https://docs.docker.com/compose/). It is built around the **MING** stack — a popular combination of open-source applications for IoT:
+
+- **M** — [Mosquitto](https://mosquitto.org/) for MQTT protocols
+- **I** — [InfluxDB](https://www.influxdata.com/) for time series database
+- **N** — [Node-RED](https://nodered.org/) for Javascript low-code flow-based programming
+- **G** — [Grafana](https://grafana.com/) for interactive dashboard
+
+Additionally, the stack includes:
 - [MySQL](https://www.mysql.com/) for SQL database
 - [Adminer](https://www.adminer.org/) for SQL database management system
 
-In Docker, each applications above is containerized into single image and it is readily available in [Docker Hub](https://hub.docker.com/). For example, everything you need to host Node-RED in a server including NodeJS and other libraries or dependencies is containerized as [nodered/node-red](https://hub.docker.com/r/nodered/node-red) image.
-
-IoT middleware require several applications to work together as you seen as listed above. We need to use Docker Compose to define and running multi-container Docker images. It simplifies the process of managing and orchestrating multiple Docker containers that work together to form a single application in a server.
+In Docker, each application above is containerized into a single image and is readily available in [Docker Hub](https://hub.docker.com/). For example, everything you need to host Node-RED in a server including NodeJS and other libraries or dependencies is containerized as [nodered/node-red](https://hub.docker.com/r/nodered/node-red) image.
 
 Docker Compose allows you to define your entire application stack in a single, easy-to-read configuration file called `docker-compose.yml`. In this file, you specify which containers should run, how they should be configured, and how they should connect to each other.
 
-In this repository contain `docker-compose.yml` with definition of stack of applications stated above so we can easily setup IoT middleware.
+This repository contains the `docker-compose.yml` with definition of the stack of applications stated above so you can easily setup an IoT middleware.
 
 **Disclaimer:** Please use this `docker-compose.yml` file as a starting point for training and testing
 but keep in mind that for production usage it might need modifications, especially on security.
