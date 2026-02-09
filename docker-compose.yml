@@ -1,52 +1,14 @@
 services:
-  # Scripting
-  nodered:
-    # build:
-    #     dockerfile: Dockerfile
-    # image: nodered
-    image: nodered/node-red:latest
-    environment:
-      - TZ=Asia/Kuala_Lumpur
-    restart: unless-stopped
-    ports:
-      - 1880:1880
-    volumes:
-      - ./configuration/nodered/settings.js:/data/settings.js
-    networks:
-      - iotstack
-  
-  # MQTT
+  # MING Stack
   mosquitto:
     image: eclipse-mosquitto:latest
     restart: unless-stopped
     ports:
       - 1883:1883
       - 9001:9001
-    volumes: 
+    volumes:
       - ./configuration/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
       - ./configuration/mosquitto/password.txt:/mosquitto/config/password.txt
-    networks:
-      - iotstack
-  
-  # Database and DBMS
-  mysql:
-    image: mysql:latest
-    restart: unless-stopped
-    environment:
-      - TZ=Asia/Kuala_Lumpur
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=iot
-    ports:
-      - 3306:3306
-    networks:
-      - iotstack
-  adminer:
-    image: adminer:latest
-    restart: unless-stopped
-    environment:
-      ADMINER_DEFAULT_SERVER: mysql
-    ports:
-      - 8060:8080
     networks:
       - iotstack
 
@@ -71,8 +33,19 @@ services:
       start_period: 30s
     networks:
       - iotstack
-  
-  # Dashboard
+
+  nodered:
+    image: nodered/node-red:latest
+    environment:
+      - TZ=Asia/Kuala_Lumpur
+    restart: unless-stopped
+    ports:
+      - 1880:1880
+    volumes:
+      - ./configuration/nodered/settings.js:/data/settings.js
+    networks:
+      - iotstack
+
   grafana:
     image: grafana/grafana:latest
     restart: unless-stopped
@@ -83,7 +56,28 @@ services:
       - '3000:3000'
     networks:
       - iotstack
-  
+
+  # Database and DBMS
+  mysql:
+    image: mysql:latest
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Kuala_Lumpur
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=iot
+    ports:
+      - 3306:3306
+    networks:
+      - iotstack
+  adminer:
+    image: adminer:latest
+    restart: unless-stopped
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql
+    ports:
+      - 8060:8080
+    networks:
+      - iotstack
 
 networks:
   iotstack:

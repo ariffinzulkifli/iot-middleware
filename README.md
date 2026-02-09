@@ -13,12 +13,12 @@ ariffin@myduino.com
 # Docker IoT Middleware
 
 This repository contains a skeleton to setup remote server to become a powerful IoT middleware along side with open-source server side applications below using [Docker Compose](https://docs.docker.com/compose/):
-- [Node-RED](https://nodered.org/) for Javascript low-code flow-based flow programming. If you would like to preinstalled with ready `dashboard`, `telegrambot`, `influxdb`, and `mysql` modules, uncomment build nodered with Dockerfile.
 - [Mosquitto](https://mosquitto.org/) for MQTT protocols
+- [InfluxDB](https://www.influxdata.com/) for time series database
+- [Node-RED](https://nodered.org/) for Javascript low-code flow-based flow programming
+- [Grafana](https://grafana.com/) for interactive dashboard
 - [MySQL](https://www.mysql.com/) for SQL database
 - [Adminer](https://www.adminer.org/) for SQL database management system
-- [InfluxDB](https://www.influxdata.com/) for time series database
-- [Grafana](https://grafana.com/) for interactive dashboard
 
 In Docker, each applications above is containerized into single image and it is readily available in [Docker Hub](https://hub.docker.com/). For example, everything you need to host Node-RED in a server including NodeJS and other libraries or dependencies is containerized as [nodered/node-red](https://hub.docker.com/r/nodered/node-red) image.
 
@@ -355,21 +355,6 @@ to access the applications in your browser.
 
 **Note:** change the `ip-address` with your server hostname or ip-address.
 
-- Node-RED http://`ip-address`:1880
-  - username: admin
-  - password: password
-- InfluxDB http://`ip-address`:8086
-  - username: admin
-  - password: password
-  - bucket name: iot-sensors
-  - organisation name: my-organisation
-  - admin token: A8C2B071-35F6-43F8-9F51-C5F584B2366B
-- Adminer http://`ip-address`:8060
-  - username: root
-  - password: password
-- Grafana http://`ip-address`:3000
-  - username: admin
-  - password: password
 Mosquitto MQTT broker can be access by it's configuration below:
 - host: `ip-address`
 - protocol: TCP
@@ -379,8 +364,25 @@ Mosquitto MQTT broker can be access by it's configuration below:
 - username: admin
 - password: password
 
+- InfluxDB http://`ip-address`:8086
+  - username: admin
+  - password: password
+  - bucket name: iot-sensors
+  - organisation name: my-organisation
+  - admin token: A8C2B071-35F6-43F8-9F51-C5F584B2366B
+- Node-RED http://`ip-address`:1880
+  - username: admin
+  - password: password
+- Grafana http://`ip-address`:3000
+  - username: admin
+  - password: password
+
 MySQL database can be access by it's configuration below:
 - host: `ip-address`
 - port: 3306
 - username: root
 - password: password
+
+- Adminer http://`ip-address`:8060
+  - username: root
+  - password: password
