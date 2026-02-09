@@ -90,6 +90,7 @@ Wait until all containers is successfully `Created` like below.
 7. Access the services by clicking on the port link in Docker Desktop or open your browser and navigate to the service URL.
 
 7.1 Node-RED http://localhost:1880 (username: `admin`, password: `password`)
+
 ![Docker Desktop Node-RED](images/docker-desktop-nodered.png)
 
 7.2 InfluxDB http://localhost:8086 (username: `admin`, password: `password`)
