@@ -77,6 +77,10 @@ Wait until all containers is successfully `Started` like below.
  ✔ Container iot-middleware-adminer-1                                 Started            0.2s
 ```
 
+   You can also verify the containers are running in Docker Desktop.
+
+   ![Docker Desktop](images/docker-desktop.png)
+
 6. Verify that the Docker Compose containers are running.
 ```bash
 docker compose ps
