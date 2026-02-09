@@ -12,12 +12,12 @@ ariffin@myduino.com
 
 # Docker IoT Middleware
 
-This repository contains a skeleton to setup a remote server to become a powerful IoT middleware using [Docker Compose](https://docs.docker.com/compose/). It is built around the **MING** stack — a popular combination of open-source applications for IoT:
+This repository contains a skeleton to setup a remote server to become a powerful IoT middleware using [Docker Compose](https://docs.docker.com/compose/). It is built around the **MING** stack, a popular combination of open-source applications for IoT:
 
-- **M** — [Mosquitto](https://mosquitto.org/) for MQTT protocols
-- **I** — [InfluxDB](https://www.influxdata.com/) for time series database
-- **N** — [Node-RED](https://nodered.org/) for Javascript low-code flow-based programming
-- **G** — [Grafana](https://grafana.com/) for interactive dashboard
+- **M** (MQTT) [Mosquitto](https://mosquitto.org/) for MQTT protocols
+- **I** (InfluxDB) [InfluxDB](https://www.influxdata.com/) for time series database
+- **N** (Node-RED) [Node-RED](https://nodered.org/) for Javascript low-code flow-based programming
+- **G** (Grafana) [Grafana](https://grafana.com/) for interactive dashboard
 
 Additionally, the stack includes:
 - [MySQL](https://www.mysql.com/) for SQL database
