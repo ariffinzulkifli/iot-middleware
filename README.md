@@ -44,6 +44,10 @@ but keep in mind that for production usage it might need modifications, especial
 
 Choose the installation guide that matches your platform:
 
+- [Option 1: PC or Mac (Docker Desktop)](#option-1-pc-or-mac-docker-desktop)
+- [Option 2: Raspberry Pi (Terminal)](#option-2-raspberry-pi-terminal)
+- [Option 3: VPS Cloud Server (GBCloud)](#option-3-vps-cloud-server-gbcloud)
+
 ### Option 1: PC or Mac (Docker Desktop)
 
 1. Download and install [Docker Desktop](https://www.docker.com/products/docker-desktop/) for your operating system (Windows or Mac).
