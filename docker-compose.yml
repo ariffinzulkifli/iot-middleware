@@ -28,23 +28,6 @@ services:
     networks:
       - iotstack
   
-  emqx:
-    image: emqx/emqx:latest
-    container_name: emqx
-    restart: unless-stopped
-    ports:
-      - "1884:1883"     # MQTT
-      - "8084:8083"     # MQTT over WebSocket
-      - "18083:18083"   # Dashboard
-    environment:
-      - TZ=Asia/Kuala_Lumpur
-      - EMQX_NAME=emqx
-      - EMQX_ALLOW_ANONYMOUS=false
-      - EMQX_DASHBOARD__DEFAULT_USERNAME=admin
-      - EMQX_DASHBOARD__DEFAULT_PASSWORD=password
-    networks:
-      - iotstack
-  
   # Database and DBMS
   mysql:
     image: mysql:latest

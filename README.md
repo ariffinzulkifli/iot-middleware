@@ -15,7 +15,6 @@ ariffin@myduino.com
 This repository contains a skeleton to setup remote server to become a powerful IoT middleware along side with open-source server side applications below using [Docker Compose](https://docs.docker.com/compose/):
 - [Node-RED](https://nodered.org/) for Javascript low-code flow-based flow programming. If you would like to preinstalled with ready `dashboard`, `telegrambot`, `influxdb`, and `mysql` modules, uncomment build nodered with Dockerfile.
 - [Mosquitto](https://mosquitto.org/) for MQTT protocols
-- [EMQX](https://www.emqx.com/) for MQTT protocols and web-based management
 - [MySQL](https://www.mysql.com/) for SQL database
 - [Adminer](https://www.adminer.org/) for SQL database management system
 - [InfluxDB](https://www.influxdata.com/) for time series database
@@ -250,12 +249,11 @@ docker compose up -d
 Wait until all containers is successfully `Started` like below.
 
 ```
-[+] Running 8/8
+[+] Running 7/7
  ✔ Network iot-middleware_iotstack                                    Created            0.1s
  ✔ Container iot-middleware-nodered-1                                 Started            0.2s
  ✔ Container iot-middleware-mosquitto-1                               Started            0.2s
- ✔ Container emqx                                                    Started            0.2s
- ✔ Container iot-middleware-mysql-1                                   Started            0.2s
+✔ Container iot-middleware-mysql-1                                   Started            0.2s
  ✔ Container iot-middleware-adminer-1                                 Started            0.2s
  ✔ Container iot-middleware-influxdb-1                                Started            0.2s
  ✔ Container iot-middleware-grafana-1                                 Started            0.2s
@@ -360,9 +358,6 @@ to access the applications in your browser.
 - Node-RED http://`ip-address`:1880
   - username: admin
   - password: password
-- EMQX http://`ip-address`:18083
-  - username: admin
-  - password: password
 - InfluxDB http://`ip-address`:8086
   - username: admin
   - password: password
@@ -383,13 +378,6 @@ Mosquitto MQTT broker can be access by it's configuration below:
   - port: 9001
 - username: admin
 - password: password
-
-EMQX MQTT broker can be access by it's configuration below:
-- host: `ip-address`
-- protocol: TCP
-  - port: 1884
-- protocol: Websockets
-  - port: 8084
 
 MySQL database can be access by it's configuration below:
 - host: `ip-address`
