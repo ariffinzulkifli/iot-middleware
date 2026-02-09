@@ -89,16 +89,16 @@ Wait until all containers is successfully `Created` like below.
 
 7. Access the services by clicking on the port link in Docker Desktop or open your browser and navigate to the service URL.
 
-Node-RED http://localhost:1880
+Node-RED http://localhost:1880 (username: `admin`, password: `password`)
 ![Docker Desktop Node-RED](images/docker-desktop-nodered.png)
 
-InfluxDB http://localhost:8086
+InfluxDB http://localhost:8086 (username: `admin`, password: `password`)
 ![Docker Desktop InfluxDB](images/docker-desktop-influxdb.png)
 
-Grafana http://localhost:3000
+Grafana http://localhost:3000 (username: `admin`, password: `password`)
 ![Docker Desktop Grafana](images/docker-desktop-grafana.png)
 
-Adminer http://localhost:8060
+Adminer http://localhost:8060 (username: `root`, password: `password`)
 ![Docker Desktop Adminer](images/docker-desktop-adminer.png)
 
 You can also verify the containers using command like below:
@@ -202,9 +202,19 @@ iot-middleware-mysql-1       mysql:latest               "docker-entrypoint.s…"
 iot-middleware-nodered-1     nodered/node-red:latest    "./entrypoint.sh"        nodered     9 minutes ago   Up 9 minutes (healthy)   0.0.0.0:1880->1880/tcp
 ```
 
-You can now access the services from your Raspberry Pi using `localhost`, hostname or IP address from other devices on the same network. For example, Node-RED can be accessed at http://localhost:1880, http://`hostname`:1880 or http://`ip-address`:1880.
+You can now access the services from your Raspberry Pi using `localhost`, hostname or IP address from other devices on the same network.
 
-![Docker Pi](images/docker-pi-nodered.png)
+Node-RED http://`ip-address`:1880 (username: `admin`, password: `password`)
+![Docker Pi Node-RED](images/docker-pi-nodered.png)
+
+InfluxDB http://`ip-address`:8086 (username: `admin`, password: `password`)
+![Docker Pi InfluxDB](images/docker-pi-influxdb.png)
+
+Grafana http://`ip-address`:3000 (username: `admin`, password: `password`)
+![Docker Pi Grafana](images/docker-pi-grafana.png)
+
+Adminer http://`ip-address`:8060 (username: `root`, password: `password`)
+![Docker Pi Adminer](images/docker-pi-adminer.png)
 
 ### Option 3: VPS Cloud Server (GBCloud)
 
@@ -435,29 +445,20 @@ or several services such as `nodered`, `mosquitto` and `influxdb`:
 docker compose up -d nodered mosquitto influxdb
 ```
 
-## Usage
+## Quick Reference
 
-After all the Docker containers have been successfully initialized and started, you should be able to access the applications in your browser.
+**Note:** Replace `ip-address` with `localhost`, hostname or IP address.
 
-**Note:** Replace `ip-address` with your server hostname or IP address.
-
-### MING Stack
-
-| Service | URL | Username | Password |
-|---------|-----|----------|----------|
+| Service | URL / Port | Username | Password |
+|---------|------------|----------|----------|
 | Mosquitto (MQTT) | `ip-address`:1883 (TCP) / `ip-address`:9001 (Websockets) | admin | password |
 | InfluxDB | http://`ip-address`:8086 | admin | password |
 | Node-RED | http://`ip-address`:1880 | admin | password |
 | Grafana | http://`ip-address`:3000 | admin | password |
+| MySQL | `ip-address`:3306 | root | password |
+| Adminer | http://`ip-address`:8060 | root | password |
 
 **InfluxDB additional configuration:**
 - Bucket name: `iot-sensors`
 - Organisation name: `my-organisation`
 - Admin token: `A8C2B071-35F6-43F8-9F51-C5F584B2366B`
-
-### Database
-
-| Service | URL | Username | Password |
-|---------|-----|----------|----------|
-| MySQL | `ip-address`:3306 | root | password |
-| Adminer | http://`ip-address`:8060 | root | password |
