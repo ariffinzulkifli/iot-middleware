@@ -87,6 +87,10 @@ Wait until all containers is successfully `Created` like below.
 
 ![Docker Desktop](images/docker-desktop.png)
 
+7. Access the services by clicking on the port link in Docker Desktop or open your browser and navigate to the service URL. For example, Node-RED can be accessed at http://localhost:1880.
+
+![Docker Desktop Node-RED](images/docker-desktop-nodered.png)
+
 You can also verify the containers using command like below:
 ```bash
 docker compose ps
@@ -190,7 +194,7 @@ iot-middleware-nodered-1     nodered/node-red:latest    "./entrypoint.sh"       
 
 You can now access the services from your Raspberry Pi using `localhost`, hostname or IP address from other devices on the same network. For example, Node-RED can be accessed at http://localhost:1880, http://`hostname`:1880 or http://`ip-address`:1880.
 
-![Docker Pi](images/docker-pi.png)
+![Docker Pi](images/docker-pi-nodered.png)
 
 ### Option 3: VPS Cloud Server (GBCloud)
 
