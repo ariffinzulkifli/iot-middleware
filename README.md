@@ -19,9 +19,7 @@ This repository contains a skeleton to setup remote server to become a powerful 
 - [MySQL](https://www.mysql.com/) for SQL database
 - [Adminer](https://www.adminer.org/) for SQL database management system
 - [InfluxDB](https://www.influxdata.com/) for time series database
-- [Redis](https://redis.io/) for memory key-value database
-- [Grafana](https://grafana.com/) for interactive dashboard and
-- [Chirpstack](https://www.chirpstack.io/) for LoRaWAN Network Server
+- [Grafana](https://grafana.com/) for interactive dashboard
 
 In Docker, each applications above is containerized into single image and it is readily available in [Docker Hub](https://hub.docker.com/). For example, everything you need to host Node-RED in a server including NodeJS and other libraries or dependencies is containerized as [nodered/node-red](https://hub.docker.com/r/nodered/node-red) image.
 
@@ -37,11 +35,8 @@ but keep in mind that for production usage it might need modifications, especial
 ## Directory layout
 
 * `docker-compose.yml`: the docker-compose file containing the services
-* `configuration/chirpstack`: directory containing the ChirpStack configuration files
-* `configuration/chirpstack-gateway-bridge`: directory containing the ChirpStack Gateway Bridge configuration
 * `configuration/mosquitto`: directory containing the Mosquitto (MQTT broker) configuration
 * `configuration/nodered`: directory containing the Node-RED configuration
-* `configuration/postgresql`: directory containing PostgreSQL initialization scripts
 
 ## Requirements
 
@@ -255,20 +250,15 @@ docker compose up -d
 Wait until all containers is successfully `Started` like below.
 
 ```
-[+] Running 13/13
- ✔ Network iot-middleware_iotstack                                    Created            0.1s 
- ✔ Container iot-middleware-mysql-1                                   Started            0.2s 
- ✔ Container iot-middleware-postgres-1                                Started            0.2s 
- ✔ Container iot-middleware-grafana-1                                 Started            0.2s 
- ✔ Container iot-middleware-nodered-1                                 Started            0.2s 
- ✔ Container iot-middleware-mosquitto-1                               Started            0.2s 
- ✔ Container iot-middleware-adminer-1                                 Started            0.2s 
- ✔ Container iot-middleware-redis-1                                   Started            0.2s 
- ✔ Container iot-middleware-influxdb-1                                Started            0.2s 
- ✔ Container iot-middleware-chirpstack-gateway-bridge-basicstation-1  Started            0.1s 
- ✔ Container iot-middleware-chirpstack-gateway-bridge-1               Started            0.0s 
- ✔ Container iot-middleware-chirpstack-1                              Started            0.0s 
- ✔ Container iot-middleware-chirpstack-rest-api-1                     Started            0.0s 
+[+] Running 8/8
+ ✔ Network iot-middleware_iotstack                                    Created            0.1s
+ ✔ Container iot-middleware-nodered-1                                 Started            0.2s
+ ✔ Container iot-middleware-mosquitto-1                               Started            0.2s
+ ✔ Container emqx                                                    Started            0.2s
+ ✔ Container iot-middleware-mysql-1                                   Started            0.2s
+ ✔ Container iot-middleware-adminer-1                                 Started            0.2s
+ ✔ Container iot-middleware-influxdb-1                                Started            0.2s
+ ✔ Container iot-middleware-grafana-1                                 Started            0.2s
 ```
 
 5. Verify that the Docker Compose containers are running using the following command.
@@ -385,11 +375,6 @@ to access the applications in your browser.
 - Grafana http://`ip-address`:3000
   - username: admin
   - password: password
-- Chirpstack http://`ip-address`:8080
-  - username: admin
-  - password: admin
-- Chirpstack REST API http://`ip-address`:8090
-
 Mosquitto MQTT broker can be access by it's configuration below:
 - host: `ip-address`
 - protocol: TCP
