@@ -147,26 +147,43 @@ cd ~/iot-middleware
 ```bash
 sudo docker compose up -d
 ```
-Wait until all containers is successfully `Started` like below.
+Wait until all containers is successfully `Created` like below.
 
 ```
-[+] Running 13/13
- ✔ Image eclipse-mosquitto:latest       Pulled            37.7s
- ✔ Image nodered/node-red:latest        Pulled            114.9s
- ✔ Image mysql:latest                   Pulled            120.5s
- ✔ Image influxdb:latest                Pulled            67.8s
- ✔ Image grafana/grafana:latest         Pulled            104.1s
- ✔ Image adminer:latest                 Pulled            70.4s
- ✔ Network iot-middleware_iotstack      Created            0.3s
- ✔ Container iot-middleware-mysql-1     Created            4.1s
- ✔ Container iot-middleware-influxdb-1  Created            4.1s
- ✔ Container iot-middleware-adminer-1   Created            4.3s
- ✔ Container iot-middleware-grafana-1   Created            4.3s
- ✔ Container iot-middleware-nodered-1   Created            4.3s
- ✔ Container iot-middleware-mosquitto-1 Created            4.3s
+[+] up 85/85
+ ✔ Image eclipse-mosquitto:latest       Pulled                                                37.7s
+ ✔ Image nodered/node-red:latest        Pulled                                                114.9s
+ ✔ Image mysql:latest                   Pulled                                                120.5s
+ ✔ Image influxdb:latest                Pulled                                                67.8s
+ ✔ Image grafana/grafana:latest         Pulled                                                104.1s
+ ✔ Image adminer:latest                 Pulled                                                70.4s
+ ✔ Network iot-middleware_iotstack      Created                                                0.3s
+ ✔ Container iot-middleware-mysql-1     Created                                                4.1s
+ ✔ Container iot-middleware-influxdb-1  Created                                                4.1s
+ ✔ Container iot-middleware-adminer-1   Created                                                4.3s
+ ✔ Container iot-middleware-grafana-1   Created                                                4.3s
+ ✔ Container iot-middleware-nodered-1   Created                                                4.3s
+ ✔ Container iot-middleware-mosquitto-1 Created                                                4.3s
 ```
 
-You can now access the services from your Raspberry Pi using `localhost` or from other devices on the same network using the Raspberry Pi hostname or IP address. For example, Node-RED can be accessed at http://localhost:1880 or http://pi5.local:1880.
+8. Verify that the Docker Compose containers are running.
+```bash
+sudo docker compose ps
+```
+
+```
+NAME                         IMAGE                      COMMAND                  SERVICE     CREATED         STATUS                   PORTS
+iot-middleware-adminer-1     adminer:latest             "entrypoint.sh docke…"   adminer     9 minutes ago   Up 9 minutes             0.0.0.0:8060->8080/tcp
+iot-middleware-grafana-1     grafana/grafana:latest     "/run.sh"                grafana     9 minutes ago   Up 9 minutes             0.0.0.0:3000->3000/tcp
+iot-middleware-influxdb-1    influxdb:latest            "/entrypoint.sh infl…"   influxdb    9 minutes ago   Up 9 minutes (healthy)   0.0.0.0:8086->8086/tcp
+iot-middleware-mosquitto-1   eclipse-mosquitto:latest   "/docker-entrypoint.…"   mosquitto   9 minutes ago   Up 9 minutes             0.0.0.0:1883->1883/tcp, 0.0.0.0:9001->9001/tcp
+iot-middleware-mysql-1       mysql:latest               "docker-entrypoint.s…"   mysql       9 minutes ago   Up 9 minutes             0.0.0.0:3306->3306/tcp
+iot-middleware-nodered-1     nodered/node-red:latest    "./entrypoint.sh"        nodered     9 minutes ago   Up 9 minutes (healthy)   0.0.0.0:1880->1880/tcp
+```
+
+You can now access the services from your Raspberry Pi using `localhost`, hostname or IP address from other devices on the same network. For example, Node-RED can be accessed at http://localhost:1880, http://`hostname`:1880 or http://`ip-address`:1880.
+
+![Docker Pi](images/docker-pi.png)
 
 ### Option 3: VPS Cloud Server (GBCloud)
 
