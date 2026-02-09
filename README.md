@@ -396,13 +396,11 @@ to access the applications in your browser.
 **Note:** change the `ip-address` with your server hostname or ip-address.
 
 Mosquitto MQTT broker can be access by it's configuration below:
-- host: `ip-address`
-- protocol: TCP
-  - port: 1883
-- protocol: Websockets
-  - port: 9001
-- username: admin
-- password: password
+  - host: `ip-address`
+  - protocol: TCP (port: 1883)
+  - protocol: Websockets (port: 9001)
+  - username: admin
+  - password: password
 
 - InfluxDB http://`ip-address`:8086
   - username: admin
@@ -418,10 +416,10 @@ Mosquitto MQTT broker can be access by it's configuration below:
   - password: password
 
 MySQL database can be access by it's configuration below:
-- host: `ip-address`
-- port: 3306
-- username: root
-- password: password
+  - host: `ip-address`
+  - port: 3306
+  - username: root
+  - password: password
 
 - Adminer http://`ip-address`:8060
   - username: root
