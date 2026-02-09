@@ -12,7 +12,7 @@ ariffin@myduino.com
 
 # Docker IoT Middleware
 
-This repository contains a skeleton to setup a remote server to become a powerful IoT middleware using [Docker Compose](https://docs.docker.com/compose/). It is built around the **MING** stack, a popular combination of open-source applications for IoT:
+This repository contains a skeleton to setup a remote server to become a powerful IoT middleware using [Docker Compose](https://docs.docker.com/compose/). It is built around the **MING** stack, a popular combination of open-source applications for IoT inspired by the [LAMP](https://en.wikipedia.org/wiki/LAMP_(software_bundle)) stack. The MING stack was first introduced in 2019 by [Alex Lennon](https://blog.balena.io/ming-stack-mqtt-influxdb-nodered-grafana-balena/), a balena Ambassador, as a reusable template for IoT projects. It is now widely adopted in [Industrial IoT (IIoT)](https://www.iiot-world.com/industrial-iot/connected-industry/the-ming-stack-what-it-is-and-how-it-works/) applications as well, including integration with [Siemens S7 PLCs](https://flowfuse.com/blog/2025/01/integrating-siemens-s7-plcs-with-node-red-guide/):
 
 - **M** (MQTT) [Mosquitto](https://mosquitto.org/) for MQTT protocols
 - **I** (InfluxDB) [InfluxDB](https://www.influxdata.com/) for time series database
