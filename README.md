@@ -101,59 +101,49 @@ docker compose logs
 
 ### Option 2: Raspberry Pi (Terminal)
 
-Here is the guide to install Docker on a 64-bit version of Debian Bullseye or Bookworm running on your Raspberry Pi. If you are unsure, you can check the architecture using the `dpkg --print-architecture` command.
+Here is the guide to install Docker on a 64-bit version of Debian Bullseye, Bookworm or Trixie running on your Raspberry Pi. If you are unsure, you can check the architecture using the `dpkg --print-architecture` command.
 
-1. Update the package list to ensure you have the latest information about available packages:
+1. Update the package list and install the required dependencies:
 ```bash
 sudo apt update
+sudo apt install ca-certificates curl
 ```
 
-2. Install the required dependencies, including certificates, curl, and gnupg:
-```bash
-sudo apt install ca-certificates curl gnupg
-```
-
-3. Create a directory for Docker's keyring:
+2. Add Docker's official GPG key:
 ```bash
 sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
 ```
 
-4. Download Docker's GPG key and save it to the keyring directory:
+3. Add the Docker repository to your package sources:
 ```bash
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/debian
+Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
 ```
 
-5. Set the appropriate permissions on the Docker GPG key:
-```bash
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
-```
-
-6. Add the Docker repository to your package sources. This command will automatically detect your Raspberry Pi's architecture and OS version:
-```bash
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(. /etc/os-release && echo $VERSION_CODENAME) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-```
-
-7. Update the package list again to include the Docker repository:
+4. Update the package list and install Docker:
 ```bash
 sudo apt update
-```
-
-8. Install Docker and related packages:
-```bash
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-9. Clone this repository.
+5. Clone this repository.
 ```bash
 git clone https://github.com/ariffinzulkifli/iot-middleware.git
 ```
 
-10. Change your working directory to the cloned repository directory.
+6. Change your working directory to the cloned repository directory.
 ```bash
 cd ~/iot-middleware
 ```
 
-11. Launch the Docker Compose services in detached mode.
+7. Launch the Docker Compose services in detached mode.
 ```bash
 sudo docker compose up -d
 ```
