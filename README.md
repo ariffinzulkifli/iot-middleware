@@ -94,12 +94,15 @@ Wait until all containers is successfully `Created` like below.
 ![Docker Desktop Node-RED](images/docker-desktop-nodered.png)
 
 7.2 InfluxDB http://localhost:8086 (username: `admin`, password: `password`)
+
 ![Docker Desktop InfluxDB](images/docker-desktop-influxdb.png)
 
 7.3 Grafana http://localhost:3000 (username: `admin`, password: `password`)
+
 ![Docker Desktop Grafana](images/docker-desktop-grafana.png)
 
 7.4 Adminer http://localhost:8060 (username: `root`, password: `password`)
+
 ![Docker Desktop Adminer](images/docker-desktop-adminer.png)
 
 You can also verify the containers using command like below:
@@ -206,15 +209,19 @@ iot-middleware-nodered-1     nodered/node-red:latest    "./entrypoint.sh"       
 9. Access the services from your Raspberry Pi using `localhost`, hostname or IP address from other devices on the same network.
 
 9.1 Node-RED http://`ip-address`:1880 (username: `admin`, password: `password`)
+
 ![Docker Pi Node-RED](images/docker-pi-nodered.png)
 
 9.2 InfluxDB http://`ip-address`:8086 (username: `admin`, password: `password`)
+
 ![Docker Pi InfluxDB](images/docker-pi-influxdb.png)
 
 9.3 Grafana http://`ip-address`:3000 (username: `admin`, password: `password`)
+
 ![Docker Pi Grafana](images/docker-pi-grafana.png)
 
 9.4 Adminer http://`ip-address`:8060 (username: `root`, password: `password`)
+
 ![Docker Pi Adminer](images/docker-pi-adminer.png)
 
 ### Option 3: VPS Cloud Server (GBCloud)
