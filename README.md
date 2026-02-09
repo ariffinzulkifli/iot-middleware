@@ -67,26 +67,34 @@ docker compose up -d
 Wait until all containers is successfully `Started` like below.
 
 ```
-[+] Running 7/7
- ✔ Network iot-middleware_iotstack                                    Created            0.1s
- ✔ Container iot-middleware-mosquitto-1                               Started            0.2s
- ✔ Container iot-middleware-influxdb-1                                Started            0.2s
- ✔ Container iot-middleware-nodered-1                                 Started            0.2s
- ✔ Container iot-middleware-grafana-1                                 Started            0.2s
- ✔ Container iot-middleware-mysql-1                                   Started            0.2s
- ✔ Container iot-middleware-adminer-1                                 Started            0.2s
+[+] Running 6/6
+ ✔ Container iot-middleware-nodered-1    Running            0.0s
+ ✔ Container iot-middleware-mosquitto-1  Running            0.0s
+ ✔ Container iot-middleware-influxdb-1   Running            0.0s
+ ✔ Container iot-middleware-grafana-1    Running            0.0s
+ ✔ Container iot-middleware-mysql-1      Running            0.0s
+ ✔ Container iot-middleware-adminer-1    Running            0.0s
 ```
 
-   You can also verify the containers are running in Docker Desktop.
+6. Verify the containers are running in Docker Desktop.
 
-   ![Docker Desktop](images/docker-desktop.png)
+![Docker Desktop](images/docker-desktop.png)
 
-6. Verify that the Docker Compose containers are running.
+You can also verify the containers using command like below:
 ```bash
 docker compose ps
 ```
 
-7. View the logs of the Docker Compose containers to monitor their output and any potential issues.
+```
+NAME                         IMAGE                      COMMAND                  SERVICE     CREATED          STATUS                    PORTS
+iot-middleware-adminer-1     adminer:latest             "entrypoint.sh docke…"   adminer     12 minutes ago   Up 12 minutes             0.0.0.0:8060->8080/tcp
+iot-middleware-grafana-1     grafana/grafana:latest     "/run.sh"                grafana     12 minutes ago   Up 12 minutes             0.0.0.0:3000->3000/tcp
+iot-middleware-influxdb-1    influxdb:latest            "/entrypoint.sh infl…"   influxdb    12 minutes ago   Up 12 minutes (healthy)   0.0.0.0:8086->8086/tcp
+iot-middleware-mosquitto-1   eclipse-mosquitto:latest   "/docker-entrypoint.…"   mosquitto   12 minutes ago   Up 12 minutes             0.0.0.0:1883->1883/tcp, 0.0.0.0:9001->9001/tcp
+iot-middleware-mysql-1       mysql:latest               "docker-entrypoint.s…"   mysql       12 minutes ago   Up 11 minutes             0.0.0.0:3306->3306/tcp
+iot-middleware-nodered-1     nodered/node-red:latest    "./entrypoint.sh"        nodered     12 minutes ago   Up 12 minutes (healthy)   0.0.0.0:1880->1880/tcp
+```
+
 ```bash
 docker compose logs
 ```
@@ -334,19 +342,28 @@ docker compose up -d
 Wait until all containers is successfully `Started` like below.
 
 ```
-[+] Running 7/7
- ✔ Network iot-middleware_iotstack                                    Created            0.1s
- ✔ Container iot-middleware-mosquitto-1                               Started            0.2s
- ✔ Container iot-middleware-influxdb-1                                Started            0.2s
- ✔ Container iot-middleware-nodered-1                                 Started            0.2s
- ✔ Container iot-middleware-grafana-1                                 Started            0.2s
- ✔ Container iot-middleware-mysql-1                                   Started            0.2s
- ✔ Container iot-middleware-adminer-1                                 Started            0.2s
+[+] Running 6/6
+ ✔ Container iot-middleware-nodered-1    Running            0.0s
+ ✔ Container iot-middleware-mosquitto-1  Running            0.0s
+ ✔ Container iot-middleware-influxdb-1   Running            0.0s
+ ✔ Container iot-middleware-grafana-1    Running            0.0s
+ ✔ Container iot-middleware-mysql-1      Running            0.0s
+ ✔ Container iot-middleware-adminer-1    Running            0.0s
 ```
 
 4. Verify that the Docker Compose containers are running.
 ```bash
 docker compose ps
+```
+
+```
+NAME                         IMAGE                      COMMAND                  SERVICE     CREATED          STATUS                    PORTS
+iot-middleware-adminer-1     adminer:latest             "entrypoint.sh docke…"   adminer     12 minutes ago   Up 12 minutes             0.0.0.0:8060->8080/tcp
+iot-middleware-grafana-1     grafana/grafana:latest     "/run.sh"                grafana     12 minutes ago   Up 12 minutes             0.0.0.0:3000->3000/tcp
+iot-middleware-influxdb-1    influxdb:latest            "/entrypoint.sh infl…"   influxdb    12 minutes ago   Up 12 minutes (healthy)   0.0.0.0:8086->8086/tcp
+iot-middleware-mosquitto-1   eclipse-mosquitto:latest   "/docker-entrypoint.…"   mosquitto   12 minutes ago   Up 12 minutes             0.0.0.0:1883->1883/tcp, 0.0.0.0:9001->9001/tcp
+iot-middleware-mysql-1       mysql:latest               "docker-entrypoint.s…"   mysql       12 minutes ago   Up 11 minutes             0.0.0.0:3306->3306/tcp
+iot-middleware-nodered-1     nodered/node-red:latest    "./entrypoint.sh"        nodered     12 minutes ago   Up 12 minutes (healthy)   0.0.0.0:1880->1880/tcp
 ```
 
 5. View the logs of the Docker Compose containers to monitor their output and any potential issues.
