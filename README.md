@@ -64,16 +64,23 @@ cd iot-middleware
 ```bash
 docker compose up -d
 ```
-Wait until all containers is successfully `Started` like below.
+Wait until all containers is successfully `Created` like below.
 
 ```
-[+] Running 6/6
- ✔ Container iot-middleware-nodered-1    Running            0.0s
- ✔ Container iot-middleware-mosquitto-1  Running            0.0s
- ✔ Container iot-middleware-influxdb-1   Running            0.0s
- ✔ Container iot-middleware-grafana-1    Running            0.0s
- ✔ Container iot-middleware-mysql-1      Running            0.0s
- ✔ Container iot-middleware-adminer-1    Running            0.0s
+[+] up 84/84
+ ✔ Image eclipse-mosquitto:latest       Pulled                                                13.3s
+ ✔ Image adminer:latest                 Pulled                                                25.5s
+ ✔ Image nodered/node-red:latest        Pulled                                                45.0s
+ ✔ Image influxdb:latest                Pulled                                                34.4s
+ ✔ Image grafana/grafana:latest         Pulled                                                47.9s
+ ✔ Image mysql:latest                   Pulled                                                50.3s
+ ✔ Network iot-middleware_iotstack      Created                                                0.0s
+ ✔ Container iot-middleware-grafana-1   Created                                                0.5s
+ ✔ Container iot-middleware-adminer-1   Created                                                0.5s
+ ✔ Container iot-middleware-influxdb-1  Created                                                0.5s
+ ✔ Container iot-middleware-mosquitto-1 Created                                                0.5s
+ ✔ Container iot-middleware-mysql-1     Created                                                0.5s
+ ✔ Container iot-middleware-nodered-1   Created                                                0.5s
 ```
 
 6. Verify the containers are running in Docker Desktop.
@@ -87,12 +94,12 @@ docker compose ps
 
 ```
 NAME                         IMAGE                      COMMAND                  SERVICE     CREATED          STATUS                    PORTS
-iot-middleware-adminer-1     adminer:latest             "entrypoint.sh docke…"   adminer     12 minutes ago   Up 12 minutes             0.0.0.0:8060->8080/tcp
-iot-middleware-grafana-1     grafana/grafana:latest     "/run.sh"                grafana     12 minutes ago   Up 12 minutes             0.0.0.0:3000->3000/tcp
-iot-middleware-influxdb-1    influxdb:latest            "/entrypoint.sh infl…"   influxdb    12 minutes ago   Up 12 minutes (healthy)   0.0.0.0:8086->8086/tcp
-iot-middleware-mosquitto-1   eclipse-mosquitto:latest   "/docker-entrypoint.…"   mosquitto   12 minutes ago   Up 12 minutes             0.0.0.0:1883->1883/tcp, 0.0.0.0:9001->9001/tcp
-iot-middleware-mysql-1       mysql:latest               "docker-entrypoint.s…"   mysql       12 minutes ago   Up 11 minutes             0.0.0.0:3306->3306/tcp
-iot-middleware-nodered-1     nodered/node-red:latest    "./entrypoint.sh"        nodered     12 minutes ago   Up 12 minutes (healthy)   0.0.0.0:1880->1880/tcp
+iot-middleware-adminer-1     adminer:latest             "entrypoint.sh docke…"   adminer     16 seconds ago   Up 15 seconds             0.0.0.0:8060->8080/tcp
+iot-middleware-grafana-1     grafana/grafana:latest     "/run.sh"                grafana     16 seconds ago   Up 15 seconds             0.0.0.0:3000->3000/tcp
+iot-middleware-influxdb-1    influxdb:latest            "/entrypoint.sh infl…"   influxdb    16 seconds ago   Up 15 seconds (healthy)   0.0.0.0:8086->8086/tcp
+iot-middleware-mosquitto-1   eclipse-mosquitto:latest   "/docker-entrypoint.…"   mosquitto   16 seconds ago   Up 15 seconds             0.0.0.0:1883->1883/tcp, 0.0.0.0:9001->9001/tcp
+iot-middleware-mysql-1       mysql:latest               "docker-entrypoint.s…"   mysql       16 seconds ago   Up 15 seconds             0.0.0.0:3306->3306/tcp
+iot-middleware-nodered-1     nodered/node-red:latest    "./entrypoint.sh"        nodered     16 seconds ago   Up 15 seconds (healthy)   0.0.0.0:1880->1880/tcp
 ```
 
 ```bash
