@@ -427,37 +427,27 @@ docker compose up -d nodered mosquitto influxdb
 
 ## Usage
 
-After all the Docker containers have been sucessfully initialized and started, you should be able
-to access the applications in your browser.
+After all the Docker containers have been successfully initialized and started, you should be able to access the applications in your browser.
 
-**Note:** change the `ip-address` with your server hostname or ip-address.
+**Note:** Replace `ip-address` with your server hostname or IP address.
 
-Mosquitto MQTT broker can be access by it's configuration below:
-  - host: `ip-address`
-  - protocol: TCP (port: 1883)
-  - protocol: Websockets (port: 9001)
-  - username: admin
-  - password: password
+### MING Stack
 
-- InfluxDB http://`ip-address`:8086
-  - username: admin
-  - password: password
-  - bucket name: iot-sensors
-  - organisation name: my-organisation
-  - admin token: A8C2B071-35F6-43F8-9F51-C5F584B2366B
-- Node-RED http://`ip-address`:1880
-  - username: admin
-  - password: password
-- Grafana http://`ip-address`:3000
-  - username: admin
-  - password: password
+| Service | URL | Username | Password |
+|---------|-----|----------|----------|
+| Mosquitto (MQTT) | `ip-address`:1883 (TCP) / `ip-address`:9001 (Websockets) | admin | password |
+| InfluxDB | http://`ip-address`:8086 | admin | password |
+| Node-RED | http://`ip-address`:1880 | admin | password |
+| Grafana | http://`ip-address`:3000 | admin | password |
 
-MySQL database can be access by it's configuration below:
-  - host: `ip-address`
-  - port: 3306
-  - username: root
-  - password: password
+**InfluxDB additional configuration:**
+- Bucket name: `iot-sensors`
+- Organisation name: `my-organisation`
+- Admin token: `A8C2B071-35F6-43F8-9F51-C5F584B2366B`
 
-- Adminer http://`ip-address`:8060
-  - username: root
-  - password: password
+### Database
+
+| Service | URL | Username | Password |
+|---------|-----|----------|----------|
+| MySQL | `ip-address`:3306 | root | password |
+| Adminer | http://`ip-address`:8060 | root | password |
