@@ -373,7 +373,7 @@ mkdir -p ~/.docker/cli-plugins/
 
 2. Download the Docker Compose binary to the specified directory.
 ```bash
-curl -SL https://github.com/docker/compose/releases/download/v2.38.2/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+curl -SL https://github.com/docker/compose/releases/download/v5.1.4/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
 ```
 
 3. Make the downloaded Docker Compose binary executable.
@@ -389,7 +389,7 @@ docker compose version
 You'll see output like below, showing that Docker Compose is successfully installed with stated version:
 ```
 Output
-Docker Compose version v2.38.2
+Docker Compose version v5.1.4
 ```
 
 #### Clone and Run

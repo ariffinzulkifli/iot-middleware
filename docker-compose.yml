@@ -2,7 +2,7 @@ services:
   # MING Stack
   mosquitto:
     image: eclipse-mosquitto:latest
-    restart: unless-stopped
+    # restart: unless-stopped
     ports:
       - 1883:1883
       - 9001:9001
@@ -14,7 +14,7 @@ services:
 
   influxdb:
     image: influxdb:latest
-    restart: unless-stopped
+    # restart: unless-stopped
     environment:
     - TZ=Asia/Kuala_Lumpur
     - DOCKER_INFLUXDB_INIT_USERNAME=admin
@@ -38,7 +38,7 @@ services:
     image: nodered/node-red:latest
     environment:
       - TZ=Asia/Kuala_Lumpur
-    restart: unless-stopped
+    # restart: unless-stopped
     ports:
       - 1880:1880
     volumes:
@@ -48,7 +48,7 @@ services:
 
   grafana:
     image: grafana/grafana:latest
-    restart: unless-stopped
+    # restart: unless-stopped
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=password
       - TZ=Asia/Kuala_Lumpur
@@ -60,7 +60,7 @@ services:
   # Database and DBMS
   mysql:
     image: mysql:latest
-    restart: unless-stopped
+    # restart: unless-stopped
     environment:
       - TZ=Asia/Kuala_Lumpur
       - MYSQL_ROOT_PASSWORD=password
@@ -71,11 +71,11 @@ services:
       - iotstack
   adminer:
     image: adminer:latest
-    restart: unless-stopped
+    # restart: unless-stopped
     environment:
       ADMINER_DEFAULT_SERVER: mysql
     ports:
-      - 8060:8080
+      - 8080:8080
     networks:
       - iotstack
 
